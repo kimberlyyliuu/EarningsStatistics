@@ -1,0 +1,80 @@
+---
+title: "Insert heading" 
+author: "Group Name"
+fontsize: 12pt
+geometry: margin=1in
+urlcolor: black
+output: pdf_document
+header-includes:
+- \usepackage{setspace}
+- \onehalfspacing
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
+```
+
+```{r, echo=FALSE, warning=FALSE,results=FALSE}
+## Use this chunk for reading in packages.
+## Use this chunk for reading in the data, combining the data, and any other major data cleaning that is not relevant to show.
+## Remove the ## before all code.
+```
+
+
+\newpage 
+
+# Pledege
+Please type your names in the appropriate space below. Failing to do so will result in a 0 on this assignment.
+
+"We have neither given nor received unauthorized help on this assignment"
+
+- Member 1:
+- Member 2:
+- Member 3:
+- Member 4:
+
+\newpage
+
+## Background
+
+## Data Description
+
+## Exploratory Data Analysis
+
+```{r, echo=FALSE}
+## Use this setting of Code chunk for any plots you wish to make
+## Refer to the Rmarkdown guide for sizing informaiton on your plots
+```
+
+
+```{r, echo=FALSE, warning=FALSE,results=FALSE}
+## Use this chunk to compute any summary statistics that you want to use
+## in your conclusions. 
+## These will not print in your report
+```
+
+## Conclusion
+
+\newpage
+
+## Appendix A: Data Dictionary
+
+|Variable Name|Abbreviated Name|Description|
+|:----:|:----:|:----:|
+|  |  |    |
+
+\newpage
+## Appendix B: Data Rows
+```{r, echo=FALSE}
+# Use head() function to output first several rows
+
+```
+
+\newpage
+## Appendix C: References
+
+### Background
+1. List your background citations here.
+
+### Data
+1. List your data citations here
