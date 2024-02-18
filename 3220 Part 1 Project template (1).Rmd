@@ -28,9 +28,9 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 "We have neither given nor received unauthorized help on this assignment"
 
-- Member 1:
-- Member 2:
-- Member 3:
+- Member 1: Kimberly Liu
+- Member 2: Hadley McQuerrey
+- Member 3: Luke Schuerer 
 - Member 4:
 
 \newpage
