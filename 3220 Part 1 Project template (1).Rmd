@@ -1,6 +1,6 @@
 ---
-title: "Insert heading" 
-author: "Group Name"
+title: "STAT 3220 Group Project" 
+author: "KHL"
 fontsize: 12pt
 geometry: margin=1in
 urlcolor: black
