@@ -15,9 +15,23 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ```
 
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
-## Use this chunk for reading in packages.
-## Use this chunk for reading in the data, combining the data, and any other major data cleaning that is not relevant to show.
-## Remove the ## before all code.
+# Use this space to load in packages
+CensusData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/2020CensusDataSet.csv", header = T)
+
+```
+
+EDA: 
+```{r}
+
+more_than_50_unique <- sapply(NSDUH_2020, function(column) {
+  if(is.numeric(column)) { 
+    return(length(unique(column)) > 50) 
+  } else {
+    return(FALSE)
+  }
+})
+quantitative_vars <- names(more_than_50_unique[more_than_50_unique])
+print(quantitative_vars)
 ```
 
 
