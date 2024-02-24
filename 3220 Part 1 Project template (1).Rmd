@@ -22,6 +22,27 @@ CensusData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220
 
 EDA: 
 ```{r}
+head(CensusData)
+
+## Using histograms
+hist(CensusData$Race)
+# heaviest reporting on race 1 -/> probably shoudln't build model with race as explanatory because of this biased reporting
+hist(CensusData$Highest_Education)
+# sufficient as explanatory
+hist(CensusData$Gender)
+# sufficient as explanatory; relatively equal reporting
+hist(CensusData$PTOT_R)
+# questionable significance, seems to be binned in a way that ambiguates data
+hist(CensusData$PEARNVAL)
+# Good response variable
+hist(CensusData$A_MARITL)
+# Look into codebook to find why this isn't binary
+hist(CensusData$HEA)
+# Good expalantory 
+hist(CensusData$MIG_DIV)
+# Oddly distributed; bimodal with odd pattern (valley immediately adjacent to mode)
+
+# Are any of the variables reported purely quantitatively? 
 
 more_than_50_unique <- sapply(NSDUH_2020, function(column) {
   if(is.numeric(column)) { 
