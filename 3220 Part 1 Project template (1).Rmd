@@ -16,7 +16,11 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 # Use this space to load in packages
+  # Data
 CensusData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/2020CensusDataSet.csv", header = T)
+  # Tidyverse (for manipulation)
+install.packages("tidyverse")
+library(tidyverse)
 
 ```
 
@@ -44,7 +48,7 @@ hist(CensusData$MIG_DIV)
 
 # Are any of the variables reported purely quantitatively? 
 
-more_than_50_unique <- sapply(NSDUH_2020, function(column) {
+more_than_50_unique <- sapply(CensusData, function(column) {
   if(is.numeric(column)) { 
     return(length(unique(column)) > 50) 
   } else {
@@ -54,6 +58,38 @@ more_than_50_unique <- sapply(NSDUH_2020, function(column) {
 quantitative_vars <- names(more_than_50_unique[more_than_50_unique])
 print(quantitative_vars)
 ```
+
+How to merge this data with another set? 
+```{r}
+# Group by a variable common to another data set.
+# But what variable? 
+# Whatever variable we group by, we will be limited by the number of unique responses to that variable; for example, if we group by gender, then we will only have 2 observations to perform regression analysis on. Ideally, we should have at least 30-50. 
+# To find out the number of unique responses for each variable: 
+number_of_responses <- sapply(CensusData, function(column) {
+  if(is.numeric(column)) { 
+    return(length(unique(column))) 
+  } else {
+    return(FALSE)
+  }
+})
+print(number_of_responses)
+```
+```{r}
+# Race (25), PTOT_R (42), and maybe Highest_Education (17) seem like viable variables to group by. 
+# Extracting these variables for further analysis: 
+potentialGroupBy<-CensusData[c("Race", "PTOT_R", "Highest_Education")]
+results<-list()
+for (i in names(potentialGroupBy)[1:3]) {
+  counts<-potentialGroupBy |>
+           group_by(.data[[i]]) |>
+           summarize(Count=n())
+  results[[i]] <- counts
+}
+results$Race
+results$PTOT_R
+results$Highest_Education
+```
+PTOT_R appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. Race is highly differential in its reporting. Higher education is intermediate of the two, and could function as a backup. 
 
 
 \newpage 
