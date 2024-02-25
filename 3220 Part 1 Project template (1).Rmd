@@ -7,6 +7,7 @@ urlcolor: black
 output: pdf_document
 header-includes:
 - \usepackage{setspace}
+- \usepackage{ulem}
 - \onehalfspacing
 ---
 
@@ -16,9 +17,12 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 
 Reading Raw Data and Subsetting
 ```{r}
+if (!exists("CensusData")) {
+#Set Working Directory
+setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
 # Storing Data in R
-firstCensusData<-read.csv("pppub20.csv")
-secondCensusData <- read.csv("pppub21.csv")
+firstCensusData<-read.csv("firstset.csv")
+secondCensusData <- read.csv("secondset.csv")
 
 # Subsetting desired variables
 firstCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
@@ -34,7 +38,9 @@ colnames(compiledCensusData)[1:3] <- c("Race", "Highest_Education", "Gender")
 write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
 
 # For further reference
-CensusData<-compiledCensusData
+CensusData<-compiledCensusData} else {
+  cat("Chunk skipped; data already loaded into environment.")
+}
 ```
 
 Accessing Compiled and Wrangled Data via GitHub
@@ -84,7 +90,7 @@ quantitative_vars <- names(more_than_50_unique[more_than_50_unique])
 print(quantitative_vars)
 ```
 
-\sout{How to merge this data with another set?} *This chunk is unnecessary*
+\sout{How to merge this data with another set?} *This chunk is unnecessary; preserved for potentially useful code*
 ```{r}
 # Group by a variable common to another data set.
 # But what variable? 
@@ -100,7 +106,7 @@ number_of_responses <- sapply(CensusData, function(column) {
 print(number_of_responses)
 ```
 
-\sout{Continued GroupBy Exploration} *This chunk is unnecessary*
+\sout{Continued GroupBy Exploration} *This chunk is unnecessary; preserved for potentially useful code*
 ```{r}
 # Race (25), PTOT_R (42), and maybe Highest_Education (17) seem like viable variables to group by. 
 # Extracting these variables for further analysis: 
@@ -118,7 +124,7 @@ results$Highest_Education
 ```
 \sout{PTOT_R appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. Race is highly differential in its reporting. Higher education is intermediate of the two, and could function as a backup. 
 
-However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.} *This portion is unnnecessary*
+However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.} *This portion is unnecessary; preserved for reference*
 
 
 \newpage 
