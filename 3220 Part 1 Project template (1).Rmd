@@ -14,7 +14,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
 ```
 
-Reading Raw Data and subsetting
+Reading Raw Data and Subsetting
 ```{r}
 # Storing Data in R
 firstCensusData<-read.csv("pppub20.csv")
@@ -37,21 +37,16 @@ write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
 CensusData<-compiledCensusData
 ```
 
-Accessing Data via GitHub
+Accessing Compiled and Wrangled Data via GitHub
 ```{r}
 CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/compiledCensusData.csv",header=T)
 ```
 
-
+Package Installation
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
-# Use this space to load in packages
-# Data
-CensusData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/2020CensusDataSet.csv", header = T)
-
-# Tidyverse (for manipulation)
-install.packages("tidyverse")
+# Tidyverse 
+if (!requireNamespace("tidyverse", quietly = T)) install.packages("tidyverse")
 library(tidyverse)
-
 ```
 
 EDA: 
@@ -134,7 +129,7 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 - Member 1: Kimberly Liu
 - Member 2: Hadley McQuerrey
-- Member 3: Luke Schuerer 
+- Member 3: Luke Schueuer 
 - Member 4:
 
 \newpage
