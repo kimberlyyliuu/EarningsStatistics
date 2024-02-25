@@ -34,7 +34,7 @@ secondCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PE
 compiledCensusData<-rbind(firstCensusData, secondCensusData)
 
 #Renaming Variables
-colnames(compiledCensusData)[1:3] <- c("Race", "Highest_Education", "Gender")
+colnames(compiledCensusData) <- c("RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV")
 
 # Exporting as a .csv file for upload to GitHub
 write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
@@ -61,25 +61,26 @@ library(tidyverse)
 
 
 ```{r, include = F}
+# TO SEE OUTPUTS OF CHUNK, CHANGE INCLUDE =F TO INCLUDE = T
 # EDA: 
 head(CensusData)
 
 ## Using histograms
-hist(CensusData$Race)
+hist(CensusData$RACE)
 # heaviest reporting on race 1 -/> probably shoudln't build model with race as explanatory because of this biased reporting
-hist(CensusData$Highest_Education)
+hist(CensusData$H_ED)
 # sufficient as explanatory
-hist(CensusData$Gender)
+hist(CensusData$SEX)
 # sufficient as explanatory; relatively equal reporting
-hist(CensusData$PTOT_R)
+hist(CensusData$TOT_IN)
 # questionable significance, seems to be binned in a way that ambiguates data
 hist(CensusData$PEARNVAL)
-# Good response variable
-hist(CensusData$A_MARITL)
+# Good response variable; examine any potential categorization in reporting
+hist(CensusData$MARITL)
 # Look into codebook to find why this isn't binary
 hist(CensusData$HEA)
-# Good expalantory 
-hist(CensusData$MIG_DIV)
+# Good explanatory 
+hist(CensusData$RES_DIV)
 # Oddly distributed; bimodal with odd pattern (valley immediately adjacent to mode)
 
 # Are any of the variables reported purely quantitatively? 
@@ -97,7 +98,7 @@ print(quantitative_vars)
 
 
 ```{r, include = F}
-# \sout{How to merge this data with another set?} # *This chunk is unnecessary; preserved for potentially useful code*
+# \sout{How to merge this data with another set?} *This chunk is unnecessary; preserved for potentially useful code*
 # Group by a variable common to another data set.
 # But what variable? 
 # Whatever variable we group by, we will be limited by the number of unique responses to that variable; for example, if we group by gender, then we will only have 2 observations to perform regression analysis on. Ideally, we should have at least 30-50. 
@@ -115,9 +116,9 @@ print(number_of_responses)
 
 ```{r, include = F}
 # \sout{Continued GroupBy Exploration} *This chunk is unnecessary; preserved for potentially useful code*
-# Race (25), PTOT_R (42), and maybe Highest_Education (17) seem like viable variables to group by. 
+# RACE (25), TOT_IN (42), and maybe H_ED (17) seem like viable variables to group by. 
 # Extracting these variables for further analysis: 
-potentialGroupBy<-CensusData[c("Race", "PTOT_R", "Highest_Education")]
+potentialGroupBy<-CensusData[c("RACE", "TOT_IN", "H_ED")]
 results<-list()
 for (i in names(potentialGroupBy)[1:3]) {
   counts<-potentialGroupBy |>
@@ -125,11 +126,11 @@ for (i in names(potentialGroupBy)[1:3]) {
            summarize(Count=n())
   results[[i]] <- counts
 }
-results$Race
-results$PTOT_R
-results$Highest_Education
+results$RACE
+results$TOT_IN
+results$H_ED
 
-# \sout{PTOT_R appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. Race is highly differential in its reporting. Higher education is intermediate of the two, and could function as a backup. 
+# \sout{TOT_IN appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. RACE is highly differential in its reporting. H_ED is intermediate of the two, and could function as a backup. 
 
 # However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.} *This portion is unnecessary; preserved for reference*
 ```
@@ -172,7 +173,7 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 ## Appendix A: Data Dictionary
 
-| Race | Race | Desc |
+| Race | RACE | Desc |
 | Highest Education | H_ED | Desc |
 | Gender | SEX | Desc |
 | Total Household Income | TOT_IN | Desc | 
