@@ -14,11 +14,41 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
 ```
 
+Reading Raw Data and subsetting
+```{r}
+# Storing Data in R
+firstCensusData<-read.csv("pppub20.csv")
+secondCensusData <- read.csv("pppub21.csv")
+
+# Subsetting desired variables
+firstCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
+secondCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
+
+# Combining the subsetted datasets
+compiledCensusData<-rbind(firstCensusData, secondCensusData)
+
+#Renaming Variables
+colnames(compiledCensusData)[1:3] <- c("Race", "Highest_Education", "Gender")
+
+# Exporting as a .csv file for upload to GitHub
+write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
+
+# For further reference
+CensusData<-compiledCensusData
+```
+
+Accessing Data via GitHub
+```{r}
+CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/compiledCensusData.csv",header=T)
+```
+
+
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 # Use this space to load in packages
-  # Data
+# Data
 CensusData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/2020CensusDataSet.csv", header = T)
-  # Tidyverse (for manipulation)
+
+# Tidyverse (for manipulation)
 install.packages("tidyverse")
 library(tidyverse)
 
@@ -137,6 +167,17 @@ Please type your names in the appropriate space below. Failing to do so will res
 |:----:|:----:|:----:|
 |  |  |    |
 
+Race = PRDTRACE
+Highest_Education = A_HGA
+Gender = A_SEX
+TOTAL INCOME = PTOT_R
+TOTAL PERSONS EARNINGS = PEARNVAL
+Marital Status = A_MARITL
+Health Status = HEA 
+Census division of previous year of residence = MIG_DIV 
+
+
+
 \newpage
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
@@ -152,3 +193,8 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 ### Data
 1. List your data citations here
+Codebook for 2020: https://www2.census.gov/programs-surveys/cps/datasets/2020/march/ASEC2020ddl_pub_full.pdf 
+Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
+
+Codebook for 2021: https://www2.census.gov/programs-surveys/cps/datasets/2021/march/asec2021_ddl_pub_full.pdf
+Download for 2021: https://www.census.gov/data/datasets/2021/demo/cps/cps-asec-2021.html 
