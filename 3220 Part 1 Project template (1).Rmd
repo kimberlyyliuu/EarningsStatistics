@@ -17,9 +17,10 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 
 Reading Raw Data and Subsetting
 ```{r}
-if (!exists("CensusData")) {
-#Set Working Directory
+if (!sum(1,1) == 2) {
+# Set Working Directory
 setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
+
 # Storing Data in R
 firstCensusData<-read.csv("firstset.csv")
 secondCensusData <- read.csv("secondset.csv")
@@ -39,7 +40,7 @@ write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
 
 # For further reference
 CensusData<-compiledCensusData} else {
-  cat("Chunk skipped; data already loaded into environment.")
+  cat("Chunk skipped; data will be loaded into environment via GitHub in the following chunk")
 }
 ```
 
