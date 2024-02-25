@@ -84,7 +84,7 @@ quantitative_vars <- names(more_than_50_unique[more_than_50_unique])
 print(quantitative_vars)
 ```
 
-How to merge this data with another set? 
+\sout{How to merge this data with another set?} *This chunk is unnecessary*
 ```{r}
 # Group by a variable common to another data set.
 # But what variable? 
@@ -100,6 +100,7 @@ number_of_responses <- sapply(CensusData, function(column) {
 print(number_of_responses)
 ```
 
+\sout{Continued GroupBy Exploration} *This chunk is unnecessary*
 ```{r}
 # Race (25), PTOT_R (42), and maybe Highest_Education (17) seem like viable variables to group by. 
 # Extracting these variables for further analysis: 
@@ -115,9 +116,9 @@ results$Race
 results$PTOT_R
 results$Highest_Education
 ```
-PTOT_R appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. Race is highly differential in its reporting. Higher education is intermediate of the two, and could function as a backup. 
+\sout{PTOT_R appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. Race is highly differential in its reporting. Higher education is intermediate of the two, and could function as a backup. 
 
-However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation. 
+However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.} *This portion is unnnecessary*
 
 
 \newpage 
