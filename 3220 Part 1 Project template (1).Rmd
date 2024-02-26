@@ -61,7 +61,7 @@ library(tidyverse)
 
 
 ```{r, include = F}
-# TO SEE OUTPUTS OF CHUNK, CHANGE INCLUDE =F TO INCLUDE = T
+# TO SEE OUTPUTS OF CHUNK, CHANGE "INCLUDE = F" TO "INCLUDE = T"
 # EDA: 
 head(CensusData)
 
