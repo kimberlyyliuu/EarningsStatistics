@@ -1,0 +1,54 @@
+---
+title: "Materials for Project Workday 2/27"
+output: pdf_document
+date: "`r Sys.Date()`"
+author: "KHL"
+fontsize: 12pt
+geometry: margin=1in
+urlcolor: blue
+output: pdf_document
+header-includes:
+- \usepackage{setspace}
+- \usepackage{ulem}
+- \onehalfspacing
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+if (!requireNamespace("tidyverse", quietly = T)) install.packages("tidyverse")
+library(tidyverse)
+CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/compiledCensusData.csv",header=T)
+```
+## Three Specific Research Questions
+-How does educational attainment impact the personal earnings of an individual in the United States?
+\linebreak -Does the gender of a person impact their personal earnings in the United States? 
+\linebreak -Does a person's health exhibit a correlation with their earnings in the United States?
+
+## Clearly Defined Observations
+An observation is defined as an individual surveyed by the US Census with the responses for the 8 following variables: 
+\linebreak | Race | RACE |
+\linebreak | Highest Education | H_ED |
+\linebreak | Gender | SEX |
+\linebreak | Total Household Income | TOT_IN |
+\linebreak | Total Personal Earnings | PEARNVAL |
+\linebreak | Marital Status | MARITL |
+\linebreak | Health Status | HEA | 
+\linebreak | Previous Year of Residence | RES_DIV |
+```{r,include=T}
+head(CensusData, n=1)
+```
+
+## Response Variable
+The response variable is "PEARNVAL," referring to the personal earnings of a person. 
+```{r}
+hist(CensusData$PEARNVAL)
+summary(CensusData$PEARNVAL)
+```
+
+## Dataset
+Chosen data sets: 2020+2021 Annual Social and Economic Benefits, Collected by the US Census
+https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html 
+https://www.census.gov/data/datasets/2021/demo/cps/cps-asec-2021.html 
+```{r}
+head(CensusData, n=10)
+```
