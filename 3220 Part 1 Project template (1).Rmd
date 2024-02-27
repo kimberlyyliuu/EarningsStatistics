@@ -148,7 +148,23 @@ results$H_ED
 
 # \sout{TOT_IN appears to be the best variable to group by statistically. It is the most evenly distributed of the three variables; each unique response has approximately the same number count. RACE is highly differential in its reporting. H_ED is intermediate of the two, and could function as a backup. 
 
-# However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.} *This portion is unnecessary; preserved for reference*
+# However, if another dataset possesses identical variables, it may be appended directly to the end, simply adding more observations. No redefinition of an observation would be necessary; individuals may still be the unit of an observation.}
+
+# Amended: State variable will be used for grouping. It provides 51 observations (states+DC). Data from every state and DC is present. 
+
+```
+
+Potential variables in another Dataset to look for, grouped by state: - Average number of hours worked by a full time employee in a week in that state
+- Average number of a children parented by a person in that state
+- average employee age in that state
+- Unemployment rate of that state
+
+```{r}
+StatesbyFIPS<- c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,seq(19,42,by=1),seq(44,51,by=1), 53,54,55,56)
+RatesofStates<-c(6.4,8.3,7.8,6.2,10.1,6.8,7.9,7.5,7.9,8.1,6.5,11.7,5.5,9.3,7.3,5.2,5.8,6.5,8.6,5.1,6.5,9.4,10.0,6.3,8.0,6.1,5.8,4.3,13.5,6.7,9.4,7.9,9.8,7.2,5.0,8.2,6.3,7.6,8.9,9.2,6.0,4.2,7.5,7.7,4.8,5.7,6.5,8.5,8.2,6.4,5.9)
+
+UnemploymentRates<-merge(StatesbyFIPS, RatesofStates)
+
 ```
 
 \newpage 
@@ -215,5 +231,4 @@ head(CensusData)
 Codebook for 2020: https://www2.census.gov/programs-surveys/cps/datasets/2020/march/ASEC2020ddl_pub_full.pdf 
 Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
 
-Codebook for 2021: https://www2.census.gov/programs-surveys/cps/datasets/2021/march/asec2021_ddl_pub_full.pdf
-Download for 2021: https://www.census.gov/data/datasets/2021/demo/cps/cps-asec-2021.html 
+2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm 
