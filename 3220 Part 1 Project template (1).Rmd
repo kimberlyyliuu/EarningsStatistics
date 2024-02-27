@@ -28,8 +28,22 @@ firstset<-read.csv("firstset.csv")
 # Subsetting desired variables
 firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
 
-#Renaming Variables
+# Renaming Variables
 colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "MIG_STATUS")
+
+# In order to merge with another dataset, we need a common grouping to match observations to, like state. Although state is not present in this dataset, it is present in another dataset pertaining to the same study, reporting on variables pertaining to household. The two sets report the same first 20 digits of the ID number, differing in the last two. The state variable may be taken from the household set, and matched to this set, which reports on the individual level. 
+# i.e.
+# H_IDNUM =  00000479261031911011
+# PERIDNUM = 0000047926103191101101
+
+# Storing the household set in R
+secondset<-read.csv("hhpub20.csv")
+
+# Pulling desired variables from the household set
+secondset<-secondset[(c("H_IDNUM","GESTFIPS"))]
+
+# Renaming Variables
+colnames(secondset) <- c("IDNUM","STATE")
 
 # Exporting as a .csv file for upload to GitHub
 write.csv(firstset, "firstset.csv", row.names = FALSE)
