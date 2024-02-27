@@ -74,14 +74,16 @@ library(readr)
 ```
 
 
-```{r, include = F}
+```{r, include = T}
 # TO SEE OUTPUTS OF CHUNK, CHANGE "INCLUDE = F" TO "INCLUDE = T"
 # EDA: 
 head(CensusData)
 
 ## Using histograms
+hist(CensusData$STATE)
+# Evenly distributed; do not treat as an explanatory variable
 hist(CensusData$RACE)
-# heaviest reporting on race 1 -/> probably shoudln't build model with race as explanatory because of this biased reporting
+# heaviest reporting on race 1 -/> probably shouldn't build model with race as explanatory because of this biased reporting
 hist(CensusData$H_ED)
 # sufficient as explanatory
 hist(CensusData$SEX)
