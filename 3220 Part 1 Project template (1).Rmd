@@ -23,24 +23,19 @@ if (!sum(1,1) == 2) {
 setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
 
 # Storing Data in R
-firstCensusData<-read.csv("firstset.csv")
-secondCensusData <- read.csv("secondset.csv")
+firstset<-read.csv("firstset.csv")
 
 # Subsetting desired variables
-firstCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
-secondCensusData<-firstCensusData[(c("PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
-
-# Combining the subsetted datasets
-compiledCensusData<-rbind(firstCensusData, secondCensusData)
+firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV"))]
 
 #Renaming Variables
-colnames(compiledCensusData) <- c("RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV")
+colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "MIG_STATUS")
 
 # Exporting as a .csv file for upload to GitHub
-write.csv(compiledCensusData, "compiledCensusData.csv", row.names = FALSE)
+write.csv(firstset, "firstset.csv", row.names = FALSE)
 
 # For further reference
-CensusData<-compiledCensusData} else {
+CensusData<-CensusData} else {
   cat("Chunk skipped; data will be loaded into environment via GitHub in the following chunk")
 }
 ```
