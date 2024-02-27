@@ -40,16 +40,19 @@ colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "M
 secondset<-read.csv("hhpub20.csv")
 
 # Pulling desired variables from the household set
-secondset<-secondset[(c("H_IDNUM","GESTFIPS", "H_IDNUM"))]
+secondset<-secondset[(c("H_IDNUM","GESTFIPS"))]
 
 # Renaming Variables
-colnames(secondset) <- c("IDNUM","STATE", "IDNUM_MATCHER")
+colnames(secondset) <- c("IDNUM","STATE")
 
 # Abbreviating the first set's ID:
 firstset$IDNUM_MATCHER<-substring(firstset$IDNUM_MATCHER, 1, nchar(firstset$IDNUM_MATCHER)-2)
 
+# Merging firstset with secondset
+CensusData<-merge(firstset, secondset, by.x = "IDNUM_MATCHER", by.y = "IDNUM")
+
 # Exporting as a .csv file for upload to GitHub
-write.csv(firstset, "firstset.csv", row.names = FALSE)
+write.csv(CensusData, "CensusData.csv", row.names = FALSE)
 
 # For further reference
 CensusData<-CensusData} else {
