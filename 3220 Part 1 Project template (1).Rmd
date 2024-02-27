@@ -52,10 +52,7 @@ firstset$IDNUM_MATCHER<-substring(firstset$IDNUM_MATCHER, 1, nchar(firstset$IDNU
 CensusData<-merge(firstset, secondset, by.x = "IDNUM_MATCHER", by.y = "IDNUM")
 
 # Exporting as a .csv file for upload to GitHub
-write.csv(CensusData, "CensusData.csv", row.names = FALSE)
-
-# For further reference
-CensusData<-CensusData} else {
+write.csv(CensusData, "CensusData.csv", row.names = FALSE)} else {
   cat("Chunk skipped; data will be loaded into environment via GitHub in the following chunk")
 }
 ```
@@ -63,7 +60,7 @@ CensusData<-CensusData} else {
 
 ```{r, include = F}
 # Accessing Compiled and Wrangled Data via GitHub
-CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/compiledCensusData.csv",header=T)
+CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/CensusData.csv",header=T)
 ```
 
 
