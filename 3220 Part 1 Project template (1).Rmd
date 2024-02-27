@@ -23,13 +23,13 @@ if (!sum(1,1) == 2) {
 setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
 
 # Storing Data in R
-firstset<-read.csv("pppub20.csv")
+firstset<-read_csv("pppub20.csv")
 
 # Subsetting desired variables
 firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV", "PERIDNUM"))]
 
 # Renaming Variables
-colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "MIG_STATUS", "IDNUM_MATCHER")
+colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "IDNUM_MATCHER")
 
 # In order to merge with another dataset, we need a common grouping to match observations to, like state. Although state is not present in this dataset, it is present in another dataset pertaining to the same study, reporting on variables pertaining to household. The two sets report the same first 20 digits of the ID number, differing in the last two. The state variable may be taken from the household set, and matched to this set, which reports on the individual level. 
 # i.e.
@@ -44,6 +44,9 @@ secondset<-secondset[(c("H_IDNUM","GESTFIPS", "H_IDNUM"))]
 
 # Renaming Variables
 colnames(secondset) <- c("IDNUM","STATE", "IDNUM_MATCHER")
+
+# Abbreviating the first set's ID:
+firstset$IDNUM_MATCHER<-substring(firstset$IDNUM_MATCHER, 1, nchar(firstset$IDNUM_MATCHER)-2)
 
 # Exporting as a .csv file for upload to GitHub
 write.csv(firstset, "firstset.csv", row.names = FALSE)
@@ -66,6 +69,8 @@ CensusData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Pr
 # Tidyverse 
 if (!requireNamespace("tidyverse", quietly = T)) install.packages("tidyverse")
 library(tidyverse)
+if (!requireNamespace("readr", quietly = T)) install.packages("readr")
+library(readr)
 ```
 
 
