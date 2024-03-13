@@ -169,14 +169,53 @@ UnemploymentRates<-data.frame(StatesbyFIPS, UNEMP_RATE)
 
 #Merge the new dataset, UnemploymentRates, with the CensusData
 compiledData<-merge(CensusData, UnemploymentRates, by.x= "STATE", by.y = "StatesbyFIPS")
+
+#Average Family Size by Stateq
 ```
 
 
 Redefining Observations to be the State: 
 ```{r}
+potentialGroupBy<-CensusData[c("RACE", "TOT_IN", "H_ED")]
+results<-list()
+for (i in names(potentialGroupBy)[1:3]) {
+  counts<-potentialGroupBy |>
+           group_by(.data[[i]]) |>
+           summarize(Count=n())
+  results[[i]] <- counts
+}
+
+averaged<-compiledData
+results<-list()
+for (i in names(averaged)) {
+  response<-averaged |>
+    group_by(STATE) |>
+    summarize(mean(i))
+  results[[i]]<-response
+}
+ 
+for(i in colnames(compiledData[3:12])) {
+  as.numeric(compiledData$i)
+}
+
+grouped<-for (i in colnames(compiledData[8])) {
 compiledData |>
   group_by(STATE) |>
   summarise(mean(PEARNVAL))
+}
+grouped
+
+
+compiledState<-  compiledData |>
+    group_by(STATE) |>
+    summarise(PEARNVAL_MEAN = mean(PEARNVAL)) 
+compiledState[,3]<- compiledData |>
+    group_by(STATE) |>
+    summarise(HEA_mean = mean(HEA)) 
+
+compiledData |>
+  group-by(STATE)
+
 
 
 ```
