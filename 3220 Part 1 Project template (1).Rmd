@@ -194,6 +194,12 @@ Reading in finalData to environment
 finalData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/finalData", header = T)
 ```
 
+*Some of the categorical variables are no longer informative when an average is taken: 
+-MARITL
+-RES_DIV 
+
+*Still need one more quant, so make one of the var that replaces the above two quant.
+
 \newpage 
 
 # Pledege
