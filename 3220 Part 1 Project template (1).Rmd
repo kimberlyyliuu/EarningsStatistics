@@ -198,7 +198,29 @@ finalData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220P
 -MARITL
 -RES_DIV 
 
+Remove from set: 
+```{r}
+incompleteData<-finalData[,-c(6,8)]
+```
+
+
 *Still need one more quant, so make one of the var that replaces the above two quant.
+
+Potential variables to replace: 
+-Sales tax by state
+-Percentage unionized by state
+-Ratio of nonwhite state residents
+-urban population measured as a ratio 
+
+Urban population data percents by state (see references for source): 
+```{r}
+UrbanPopData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/UrbanPopData.csv",header=T)
+UrbanPopData<-UrbanPopData[-52,]
+
+# Merge with set
+incompleteData<-merge(incompleteData, UrbanPopData, by.x="STATE")
+```
+
 
 \newpage 
 
@@ -210,7 +232,6 @@ Please type your names in the appropriate space below. Failing to do so will res
 - Member 1: Kimberly Liu
 - Member 2: Hadley McQuerrey
 - Member 3: Luke Schueuer 
-- Member 4:
 
 \newpage
 
@@ -265,3 +286,6 @@ Codebook for 2020: https://www2.census.gov/programs-surveys/cps/datasets/2020/ma
 Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
 
 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm 
+
+2010 Urban Percentage of Population: 
+https://www.icip.iastate.edu/tables/population/urban-pct-states 
