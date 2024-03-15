@@ -231,9 +231,13 @@ completeData<-merge(incompleteData,TaxData,by.x="STATE", by.y="FIPS")
 completeData<-completeData[, c("State", setdiff(names(completeData), "State"))]
 
 #Export
-write.csv(completeData, "completeData")
+write.csv(completeData, "completeData", row.names = F)
 ```
 
+Read in Final Version of Data from GitHub
+```{r}
+incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
+```
 
 \newpage 
 
@@ -244,7 +248,7 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 - Member 1: Kimberly Liu
 - Member 2: Hadley McQuerrey
-- Member 3: Luke Schueuer 
+- Member 3: Luke Scheuer 
 
 \newpage
 
@@ -255,8 +259,12 @@ Please type your names in the appropriate space below. Failing to do so will res
 ## Exploratory Data Analysis
 
 ```{r, echo=FALSE}
-## Use this setting of Code chunk for any plots you wish to make
-## Refer to the Rmarkdown guide for sizing informaiton on your plots
+dataForPlot<-incomeData[-6]
+
+par(mfrow=c(3,3))
+for (i in names(dataForPlot)[3:9]) {
+  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earninngs")
+}
 ```
 
 
@@ -272,14 +280,17 @@ Please type your names in the appropriate space below. Failing to do so will res
 
 ## Appendix A: Data Dictionary
 
-| Race | RACE | Desc |
+| State | State | Desc |
+| State by FIPS Code | STATE | Desc |
 | Highest Education | H_ED | Desc |
 | Gender | SEX | Desc |
 | Total Household Income | TOT_IN | Desc | 
 | Total Personal Earnings | PEARNVAL | Desc | 
-| Marital Status | MARITL | Desc |
 | Health Status | HEA | Desc | 
-| Previous Year of Residence | RES_DIV | Desc |
+| Unemployment Rate | UNEMP_RATE | Desc | 
+| Percentage of Urban Residents | URB_PER | Desc | 
+| Sales Tax Rate | TAX_RTE | Desc | 
+
 
 \newpage
 ## Appendix B: Data Rows
