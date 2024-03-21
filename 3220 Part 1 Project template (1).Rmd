@@ -26,10 +26,10 @@ setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
 firstset<-read_csv("pppub20.csv")
 
 # Subsetting desired variables
-firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV", "PERIDNUM"))]
+firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV", "PERIDNUM", "A_AGE"))]
 
 # Renaming Variables
-colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "IDNUM_MATCHER")
+colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "IDNUM_MATCHER", "AGE")
 
 # In order to merge with another dataset, we need a common grouping to match observations to, like state. Although state is not present in this dataset, it is present in another dataset pertaining to the same study, reporting on variables pertaining to household. The two sets report the same first 20 digits of the ID number, differing in the last two. The state variable may be taken from the household set, and matched to this set, which reports on the individual level. 
 # i.e.
