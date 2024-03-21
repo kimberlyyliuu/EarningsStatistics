@@ -170,7 +170,15 @@ UnemploymentRates<-data.frame(StatesbyFIPS, UNEMP_RATE)
 #Merge the new dataset, UnemploymentRates, with the CensusData
 compiledData<-merge(CensusData, UnemploymentRates, by.x= "STATE", by.y = "StatesbyFIPS")
 
-#Average Family Size by State
+#Remove people with PEARN_VAL = 0 
+
+compiledData <- 
+  compiledData |>
+    filter(PEARNVAL != 0)
+
+#Remove people under 18
+compiledData <- compiledData |>
+  filter(AGE >= 18)
 ```
 
 
