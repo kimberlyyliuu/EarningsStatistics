@@ -19,17 +19,14 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ```{r, include = F}
 # Reading Raw Data and Subsetting
 if (!sum(1,1) == 2) {
-# Set Working Directory
-setwd("/Users/hadleymcq/Desktop/STAT 3220/Project 1/Data for 3220")
-
 # Storing Data in R
-firstset<-read_csv("pppub20.csv")
+firstset<-pppub20
 
 # Subsetting desired variables
-firstset<-firstset[(c("PERIDNUM", "PRDTRACE", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "A_MARITL", "HEA", "MIG_DIV", "PERIDNUM", "A_AGE"))]
+firstset<-firstset[(c("PERIDNUM", "A_HGA", "A_SEX", "PTOT_R", "PEARNVAL", "HEA", "PERIDNUM", "A_AGE", "PEMLR"))]
 
 # Renaming Variables
-colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "MARITL", "HEA", "RES_DIV", "IDNUM_MATCHER", "AGE")
+colnames(firstset) <- c("IDNUM", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "HEA", "IDNUM_MATCHER", "AGE", "EMPLR")
 
 # In order to merge with another dataset, we need a common grouping to match observations to, like state. Although state is not present in this dataset, it is present in another dataset pertaining to the same study, reporting on variables pertaining to household. The two sets report the same first 20 digits of the ID number, differing in the last two. The state variable may be taken from the household set, and matched to this set, which reports on the individual level. 
 # i.e.
@@ -37,7 +34,7 @@ colnames(firstset) <- c("IDNUM", "RACE", "H_ED", "SEX", "TOT_IN", "PEARNVAL", "M
 # PERIDNUM = 0000047926103191101101
 
 # Storing the household set in R
-secondset<-read.csv("hhpub20.csv")
+secondset<-hhpub20
 
 # Pulling desired variables from the household set
 secondset<-secondset[(c("H_IDNUM","GESTFIPS"))]
@@ -170,12 +167,12 @@ UnemploymentRates<-data.frame(StatesbyFIPS, UNEMP_RATE)
 #Merge the new dataset, UnemploymentRates, with the CensusData
 compiledData<-merge(CensusData, UnemploymentRates, by.x= "STATE", by.y = "StatesbyFIPS")
 
-#Remove people with PEARN_VAL = 0 
+#Remove unemployed people:
+compiledData<-compiledData |>
+  filter(1 <= EMPLR)
 
-compiledData <- 
-  compiledData |>
-    filter(PEARNVAL != 0)
-
+compiledData<-compiledData |>
+  filter(4 >= EMPLR)
 #Remove people under 18
 compiledData <- compiledData |>
   filter(AGE >= 18)
@@ -186,7 +183,7 @@ Redefining Observations to be the State:
 ```{r}
 finalData <- compiledData |>
   group_by(STATE) |>
-  summarize(across(4:11, mean, na.rm = T))
+  summarize(across(4:12, mean, na.rm = T))
 ```
 
 Making final dataset available on GitHub: 
