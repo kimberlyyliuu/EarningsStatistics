@@ -183,7 +183,7 @@ Redefining Observations to be the State:
 ```{r}
 finalData <- compiledData |>
   group_by(STATE) |>
-  summarize(across(4:12, mean, na.rm = T))
+  summarize(across(3:10, mean, na.rm = T))
 ```
 
 Making final dataset available on GitHub: 
@@ -199,31 +199,12 @@ Reading in finalData to environment
 finalData <- read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/finalData", header = T)
 ```
 
-*Some of the categorical variables are no longer informative when an average is taken: 
--MARITL
--RES_DIV 
-
-Remove from set: 
-```{r}
-incompleteData<-finalData[,-c(6,8)]
-```
-
-
-*Still need one more quant, so make one of the var that replaces the above two quant.
-
-Potential variables to replace: 
--Sales tax by state
--Percentage unionized by state
--Ratio of nonwhite state residents
--urban population measured as a ratio 
-
 Urban population data percents by state (see references for source): 
 ```{r}
 UrbanPopData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/UrbanPopData.csv",header=T)
-UrbanPopData<-UrbanPopData[-52,]
 
 # Merge with set
-incompleteData<-merge(incompleteData, UrbanPopData, by.x="STATE")
+incompleteData<-merge(finalData, UrbanPopData, by.x="STATE")
 ```
 
 Tax rates by state (see references for source): 
@@ -232,7 +213,7 @@ TaxData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Proje
 TaxData<-TaxData[,1:3]
 
 # Merge with set, including State names for ease of interpretation
-completeData<-merge(incompleteData,TaxData,by.x="STATE", by.y="FIPS")
+completeData<-merge(finalData,TaxData,by.x="STATE", by.y="FIPS")
 completeData<-completeData[, c("State", setdiff(names(completeData), "State"))]
 
 #Export
