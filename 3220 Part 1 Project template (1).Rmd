@@ -41,6 +41,11 @@ Please type your names in the appropriate space below. Failing to do so will res
   \item: Does a higher unemployment rate within a state, after adjusting for urban percentile and tax percentage, predict a lower average total income, and does this effect vary by sex? 
 \end{itemize}
 
+The Census is beyond a historical record or constitutional mandate. The decennial census plays a pivotal role in shaping the political and economic landscape of the nation. Through the meticulous surveying of every resident, the census results directly influence the allocation of hundreds of billions of dollars in federal funding to states, counties, and communities. This funding, critical for schools, hospitals, roads, and public works, is determined by population totals and breakdowns by sex, age, race, and other factors, ensuring that each community receives its fair share based on its specific needs (Bureau, 2021). Beyond funding, census data are instrumental in the equitable distribution of resources for over 100 federal programs, including Medicaid, Head Start, and SNAP. The accuracy of these counts ensures that funding is justly allocated, supporting health, education, housing, and infrastructure programs vital for community well-being.
+
+Redistricting and apportionment are other critical areas where census results hold significant sway. Post-census, state and local officials utilize the updated data to redraw congressional, state, and local district boundaries, ensuring that each district contains roughly equal numbers of people (Mather & Scommegna, 2019). This process is fundamental to maintaining the one-person, one-vote rule, safeguarding the equity of voting power across the nation. Additionally, the apportionment of seats in the U.S. House of Representatives is based on state population counts from the census (Farley, 2020). This means no state has a permanent claim to its current number of House seats; rather, these seats are redistributed according to each state's share of the national population. This redistribution can shift political power, with states experiencing population growth, often in the southern and western regions, gaining seats at the expense of those in the Northeast and Midwest. The initial data from the census, therefore, not only impacts the immediate next decade of federal funding, redistricting, and apportionment but also sets the stage for the political dynamics and resource allocation of the future.
+
+In essence, the decennial census results provide a foundation for a fair and functional democracy, guiding crucial decisions on federal funding, redistricting, and apportionment. These activities, in turn, influence every aspect of American life, from local governance and community services to the national political landscape, underscoring the importance of accurate and comprehensive census data.
 
 
 ## Data Description
@@ -97,6 +102,12 @@ head(incomeData, n=15)
 
 ### Background
 1. List your background citations here.
+
+Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://www.census.gov/programs-surveys/decennial-census/about/why.html#:~:text=The%20results%20of%20the%20census,%2C%20roads%2C%20and%20public%20works. 
+
+Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so important?. Population Reference Bureau https://www.prb.org/resources/importance-of-u-s-census/ 
+
+Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
 
 ### Data
 1. List your data citations here
