@@ -36,9 +36,9 @@ Please type your names in the appropriate space below. Failing to do so will res
 ## Background
 
 \begin{itemize}
-  \item Is unemployment rate and average income higher in urban areas than in rural areas?
-  \item Does higher educational attainment predict higher earnings?
-  \item Do higher urbanization levels increase the level of education attainment? unemployment rates, and income?
+  \item How does a higher level of educational attainment influence total income across different states, controlling for urbanization and tax rates?
+  \item What is the impact of being older, of different genders, and having better health status on total income in various levels of urbanization across states?
+  \item: Does a higher unemployment rate within a state, after adjusting for urban percentile and tax percentage, predict a lower average total income, and does this effect vary by sex? 
 \end{itemize}
 
 
