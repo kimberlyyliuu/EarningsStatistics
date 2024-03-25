@@ -16,8 +16,9 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
 ```
 
-Read in Final Version of Data from GitHub
-```{r}
+
+```{r, include = FALSE}
+# Read in Final Version of Data from GitHub
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
 ```
 
