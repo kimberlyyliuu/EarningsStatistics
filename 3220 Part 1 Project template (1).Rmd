@@ -94,6 +94,9 @@ for (i in names(dataForPlot)[3:9]) {
 ```
 
 ## Conclusion
+Write up a conclusion that addresses the following: 
+  - About 1-1.5 page long
+
 
 Outline: 
 - interpret the graphical summaries 
