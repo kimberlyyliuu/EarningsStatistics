@@ -59,10 +59,29 @@ During the data preparation process, several potential issues were considered. T
 
 ## Exploratory Data Analysis
 
+Outline 
+- must include histogram of response variable (total income)
+- must include at least four graphical representations and the report should address major features of the data.
+- You must include at least one summary that relate to each of your research questions in some way
+ 
+Graphs you can possibly include: 
+- Histogram of total income  (PEARNVAL)
+- Boxplot of total income (PEARNVAL) by highest education level (H_ED) or Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
+- Scatterplot of Average Total Income by Gender across Different Urbanization Levels
+- Scatterplot of total income (PEARNVAL) by age
+- Boxplot or Scatterplot of total income (PEARNVAL) by health status (HEA) 
+
+
+```{r}
+hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Histogram of Personal Earnings")
+```
+
+
 ```{r, echo=FALSE}
 dataForPlot<-incomeData[-6]
 par(mfrow=c(3,3))
 for (i in names(dataForPlot)[3:9]) {
+  if (which(names(dataForPlot) == i) == 4) next  # Skip the response variable
   plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earninngs")
 }
 ```
@@ -75,6 +94,17 @@ for (i in names(dataForPlot)[3:9]) {
 ```
 
 ## Conclusion
+
+Outline: 
+- interpret the graphical summaries 
+- make sure to tie these all to our 3 research questions
+- include a numerical summary that corresponds with the graphical summary 
+- include context if there are any large discrepancies 
+- use the code chunk above to compute any summary statistics that you want to use in your conclusions. 
+- include a description as to why your response variable is
+suitable for regression. If it is not suitable, you should discuss what you will
+need to do to make it suitable
+
 
 \newpage
 
