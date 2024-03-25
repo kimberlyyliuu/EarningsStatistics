@@ -53,7 +53,11 @@ During the data preparation process, several potential issues were considered. T
 ## Exploratory Data Analysis
 
 ```{r, echo=FALSE}
-
+dataForPlot<-incomeData[-6]
+par(mfrow=c(3,3))
+for (i in names(dataForPlot)[3:9]) {
+  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earninngs")
+}
 ```
 
 
