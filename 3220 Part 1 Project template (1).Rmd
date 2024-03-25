@@ -34,16 +34,21 @@ Please type your names in the appropriate space below. Failing to do so will res
 \newpage
 ## Background
 
-
 \begin{itemize}
   \item Is unemployment rate and average income higher in urban areas than in rural areas?
   \item Does higher educational attainment predict higher earnings?
-  \item Do higher urbanization levels increase the level of education attainment, unemployment rates, and income?
+  \item Do higher urbanization levels increase the level of education attainment?  unemployment rates, and income?
 \end{itemize}
 
 
 
 ## Data Description
+
+The dataset was compiled from multiple reputable sources, primarily focusing on the United States demographic, economic, and educational landscapes as of 2020. The core of this dataset originates from the Annual Social and Economic Supplement (ASEC) survey, conducted by the US Census Bureau. This survey incorporates the basic Current Population Survey (CPS)—a vital source for official government statistics on employment and unemployment—alongside supplemental questions that delve into poverty, geographic mobility/migration, and work experience. To enrich this dataset further, unemployment rate data were incorporated from the US Bureau of Labor Statistics, a key authority on labor market activity and working conditions in the US. Additionally, the dataset includes urban population percentages for each state, derived from the US Census Bureau’s Decennial Census of Population and Housing, providing insights into urban versus rural demographics. Sales tax rates by state, as reported by the Tax Foundation, were also integrated to offer a financial perspective.
+
+In preparing this comprehensive dataset, a merge process was used to align the data by State. Given the ASEC survey's extensive individual-level data, averages for variables such as highest level of education attained, sex, total income, and age were calculated and then aggregated on a State basis. To ensure consistency and relevance, the dataset was cleaned to include only individuals aged 18 and above, thereby aligning the education and income data more accurately with the adult population. This curated ASEC data was subsequently merged with state-sorted unemployment rate data from the Bureau of Labor Statistics and sales tax rates from the Tax Foundation, ensuring a cohesive dataset that facilitates multifaceted analyses.
+
+During the data preparation process, several potential issues were considered. The exclusion of individuals under 18 could limit insights into the full spectrum of educational engagement and early income patterns. Furthermore, while merging datasets from various sources enhances the dataset’s depth, it also introduces complexities related to data compatibility and consistency. Nonetheless, the sources of this data—namely the US Census Bureau, the Bureau of Labor Statistics, and the Tax Foundation—are renowned for their reliability and the rigorous methodologies they employ, underpinning the overall trustworthiness of the dataset. This merged dataset, while primarily representing a snapshot of 2020, offers a valuable foundation for exploring socio-economic dynamics across the United States.
 
 ## Exploratory Data Analysis
 
