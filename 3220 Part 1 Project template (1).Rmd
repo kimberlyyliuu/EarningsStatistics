@@ -37,7 +37,7 @@ Please type your names in the appropriate space below. Failing to do so will res
 \begin{itemize}
   \item Is unemployment rate and average income higher in urban areas than in rural areas?
   \item Does higher educational attainment predict higher earnings?
-  \item Do higher urbanization levels increase the level of education attainment?  unemployment rates, and income?
+  \item Do higher urbanization levels increase the level of education attainment? unemployment rates, and income?
 \end{itemize}
 
 
@@ -88,7 +88,7 @@ for (i in names(dataForPlot)[3:9]) {
 \newpage
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
-
+head(incomeData, n=15)
 ```
 
 \newpage
