@@ -32,8 +32,16 @@ Please type your names in the appropriate space below. Failing to do so will res
 - Member 3: Luke Scheuer 
 
 \newpage
-
 ## Background
+
+
+\begin{itemize}
+  \item Is unemployment rate and average income higher in urban areas than in rural areas?
+  \item Does higher educational attainment predict higher earnings?
+  \item Do higher urbanization levels increase the level of education attainment, unemployment rates, and income?
+\end{itemize}
+
+
 
 ## Data Description
 
