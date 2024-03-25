@@ -8,6 +8,7 @@ output: pdf_document
 header-includes:
 - \usepackage{setspace}
 - \usepackage{ulem}
+- \usepackage{hyperref}
 - \onehalfspacing
 ---
 
@@ -99,7 +100,17 @@ head(incomeData, n=15)
 
 ### Data
 1. List your data citations here
-Codebook for 2020: https://www2.census.gov/programs-surveys/cps/datasets/2020/march/ASEC2020ddl_pub_full.pdf 
+
+\begin{itemize}
+  \item 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm
+  \item 2010 Urban Percentage of Population:https://www.icip.iastate.edu/tables/population/urban-pct-states
+  \item 2020 Tax Data: https://taxfoundation.org/data/all/state/2020-sales-taxes/
+  \item Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
+  \item Codebook for 2020: 
+\end{itemize}
+
+Codebook for 2020: https://www.census.gov/programs-surveys/cps/datasets/2020/march/ASEC2020ddl_pub_full.pdf 
+
 Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
 
 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm 
