@@ -21,7 +21,8 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ```{r, include = FALSE}
 # Read in Final Version of Data from GitHub
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
-install.packages("ggplot2")
+#install.packages("ggplot2")
+#install.packages("ggthemes")
 library(ggplot2)
 library(dplyr)
 library(ggthemes)
