@@ -23,6 +23,8 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
 install.packages("ggplot2")
 library(ggplot2)
+library(dplyr)
+library(ggthemes)
 ```
 
 \newpage 
@@ -78,7 +80,10 @@ Graphs you can possibly include:
 
 ```{r}
 ### Histogram of PEARNVAL
-hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Histogram of Personal Earnings")
+ggplot(incomeData,aes(x=PEARNVAL)) +
+  geom_histogram(bins=20)+
+  labs(x="Personal Earnings (USD)",y="Count",title="Distribution of Personal Earnings by State") +
+  theme_linedraw()
 
 ###  Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
 incomeData$Education_Level <- cut(incomeData$H_ED,
@@ -96,26 +101,44 @@ ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
                                 "Associate Degree - Occupational/Vocational" = "blue",
                                 "Associate Degree - Academic Program" = "orange",
                                 "Bachelor's Degree" = "black")) +
-  labs(x = "Highest Education (Numeric)", y = "Personal Earnings (PEARNVAL)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
+  labs(x = "Highest Education (Numeric)", y = "Personal Earnings (USD)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ### Scatterplot of total income (PEARNVAL) by age
-cor_coefficient <- cor(incomeData$AGE, data$PEARNVAL, use = "complete.obs")
+agecor_coefficient <- cor(incomeData$AGE, incomeData$PEARNVAL, use = "complete.obs")
 ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
   geom_point() +
   labs(x = "Age", y = "Personal Earnings", title = "Age vs Personal Earnings") +
-  annotate("text", x = Inf, y = Inf, label = paste("r = ", round(cor_coefficient, 2)),
+  annotate("text", x = Inf, y = Inf, label = paste("r = ", round(agecor_coefficient, 3)),
            hjust = 1.05, vjust = 2, size = 5, color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         plot.title = element_text(hjust = 0.5))
 
 ###Scatterplot of total income (PEARNVAL) by health status (HEA) 
-    plot(incomeData$PEARNVAL, incomeData$HEA, main= "Earnings by Health Status")
-    cor(incomeData$PEARNVAL, incomeData$HEA)
+incomeData$Health_Status<-cut(incomeData$HEA,
+                              breaks= c(0,1,2,3,4,5),
+                              labels= c("Excellent Health",
+                                        "Very Good Health",
+                                        "Good Health",
+                                        "Fair Health",
+                                        "Poor Health"))
+heacor_coefficient<-cor(incomeData$HEA,incomeData$PEARNVAL)
+ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) + 
+  geom_point() + 
+  scale_color_manual(values=c("Excellent Health" = "purple",
+                              "Very Good Health" = "blue",
+                              "Good Health" = "orange",
+                              "Fair Health" = "black",
+                              "Poor Health" = "deepskyblue4")) +
+  labs(x="Health Status (Numeric)",y="Personal Earnings (USD)",color="Health Status",title="Health Status vs Personal Earnings") +
+  theme_linedraw() +
+  annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
+           hjust=1.1, vjust=2, size=5, color="black")
+  
+
 ### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
 
 ```
-
 
 ```{r, echo=FALSE}
 dataForPlot<-incomeData[-6]
