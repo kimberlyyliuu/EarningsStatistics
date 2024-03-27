@@ -12,6 +12,7 @@ header-includes:
 - \onehalfspacing
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
 ```
@@ -20,6 +21,8 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ```{r, include = FALSE}
 # Read in Final Version of Data from GitHub
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
+install.packages("ggplot2")
+library(ggplot2)
 ```
 
 \newpage 
@@ -59,6 +62,7 @@ During the data preparation process, several potential issues were considered. T
 
 ## Exploratory Data Analysis
 
+First, the Histogram of Personal Earnings displays the spread
 Outline 
 - must include histogram of response variable (total income)
 - must include at least four graphical representations and the report should address major features of the data.
@@ -74,6 +78,27 @@ Graphs you can possibly include:
 
 ```{r}
 hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Histogram of Personal Earnings")
+
+
+###Boxplot of Highest Education by Age
+   incomedata2 <-incomeData
+   incomedata2$H_EDtrunc <- c(trunc(incomeData$H_ED))
+   boxplot(PEARNVAL~H_EDtrunc,data=incomedata2, main="Boxplot",
+   xlab="Highest Education", ylab="Earnings")
+   
+### OR Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
+  plot(incomeData$PEARNVAL, incomeData$H_ED, main="Earnings by Age")
+   cor(incomeData$PEARNVAL, incomeData$H_ED)
+### Scatterplot of total income (PEARNVAL) by age
+    plot(incomeData$PEARNVAL, incomeData$AGE, main="Earnings by Age")
+    cor(incomeData$PEARNVAL, incomeData$AGE)
+###Scatterplot of total income (PEARNVAL) by health status (HEA) 
+    plot(incomeData$PEARNVAL, incomeData$HEA, main= "Earnings by Health Status")
+    cor(incomeData$PEARNVAL, incomeData$HEA)
+### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
+    
+    NO CLUE
+    
 ```
 
 
@@ -84,7 +109,11 @@ for (i in names(dataForPlot)[3:9]) {
   if (which(names(dataForPlot) == i) == 4) next  # Skip the response variable
   plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earninngs")
 }
+
+   
 ```
+
+
 
 
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
@@ -130,6 +159,7 @@ need to do to make it suitable
 ```{r, echo=FALSE}
 head(incomeData, n=15)
 ```
+
 
 \newpage
 ## Appendix C: References
