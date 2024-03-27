@@ -82,9 +82,8 @@ hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Hist
 
 ###  Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
 incomeData$Education_Level <- cut(incomeData$H_ED,
-                            breaks = c(38.5, 39.5, 40.5, 41.5, 42.5, 43.5),
-                            labels = c("High School Graduate",
-                                       "Some College but No Degree",
+                            breaks = c(39, 40, 41, 42, 43),
+                            labels = c("Some College but No Degree",
                                        "Associate Degree - Occupational/Vocational",
                                        "Associate Degree - Academic Program",
                                        "Bachelor's Degree"),
@@ -92,17 +91,24 @@ incomeData$Education_Level <- cut(incomeData$H_ED,
 
 ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
   geom_point() +
-  scale_color_manual(values = c("High School Graduate" = "lightblue",
-                                "Some College but No Degree" = "lightgreen",
-                                "Associate Degree - Occupational/Vocational" = "lightpink",
-                                "Associate Degree - Academic Program" = "lightblue",
-                                "Bachelor's Degree" = "orange")) +
+  scale_color_manual(values = c("High School Graduate" = "green",
+                                "Some College but No Degree" = "lightpink",
+                                "Associate Degree - Occupational/Vocational" = "blue",
+                                "Associate Degree - Academic Program" = "orange",
+                                "Bachelor's Degree" = "black")) +
   labs(x = "Highest Education (Numeric)", y = "Personal Earnings (PEARNVAL)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ### Scatterplot of total income (PEARNVAL) by age
-    plot(incomeData$PEARNVAL, incomeData$AGE, main="Earnings by Age")
-    cor(incomeData$PEARNVAL, incomeData$AGE)
+cor_coefficient <- cor(incomeData$AGE, data$PEARNVAL, use = "complete.obs")
+ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
+  geom_point() +
+  labs(x = "Age", y = "Personal Earnings", title = "Age vs Personal Earnings") +
+  annotate("text", x = Inf, y = Inf, label = paste("r = ", round(cor_coefficient, 2)),
+           hjust = 1.05, vjust = 2, size = 5, color = "black") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5))
+
 ###Scatterplot of total income (PEARNVAL) by health status (HEA) 
     plot(incomeData$PEARNVAL, incomeData$HEA, main= "Earnings by Health Status")
     cor(incomeData$PEARNVAL, incomeData$HEA)
