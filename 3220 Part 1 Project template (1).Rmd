@@ -77,18 +77,29 @@ Graphs you can possibly include:
 
 
 ```{r}
+### Histogram of PEARNVAL
 hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Histogram of Personal Earnings")
 
+###  Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
+incomeData$Education_Level <- cut(incomeData$H_ED,
+                            breaks = c(38.5, 39.5, 40.5, 41.5, 42.5, 43.5),
+                            labels = c("High School Graduate",
+                                       "Some College but No Degree",
+                                       "Associate Degree - Occupational/Vocational",
+                                       "Associate Degree - Academic Program",
+                                       "Bachelor's Degree"),
+                            include.lowest = TRUE)
 
-###Boxplot of Highest Education by Age
-   incomedata2 <-incomeData
-   incomedata2$H_EDtrunc <- c(trunc(incomeData$H_ED))
-   boxplot(PEARNVAL~H_EDtrunc,data=incomedata2, main="Boxplot",
-   xlab="Highest Education", ylab="Earnings")
-   
-### OR Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
-  plot(incomeData$PEARNVAL, incomeData$H_ED, main="Earnings by Age")
-   cor(incomeData$PEARNVAL, incomeData$H_ED)
+ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
+  geom_point() +
+  scale_color_manual(values = c("High School Graduate" = "lightblue",
+                                "Some College but No Degree" = "lightgreen",
+                                "Associate Degree - Occupational/Vocational" = "lightpink",
+                                "Associate Degree - Academic Program" = "lightblue",
+                                "Bachelor's Degree" = "orange")) +
+  labs(x = "Highest Education (Numeric)", y = "Personal Earnings (PEARNVAL)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ### Scatterplot of total income (PEARNVAL) by age
     plot(incomeData$PEARNVAL, incomeData$AGE, main="Earnings by Age")
     cor(incomeData$PEARNVAL, incomeData$AGE)
@@ -96,9 +107,7 @@ hist(incomeData$PEARNVAL, ylab="Frequency", xlab="Personal Earnings", main="Hist
     plot(incomeData$PEARNVAL, incomeData$HEA, main= "Earnings by Health Status")
     cor(incomeData$PEARNVAL, incomeData$HEA)
 ### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
-    
-    NO CLUE
-    
+
 ```
 
 
