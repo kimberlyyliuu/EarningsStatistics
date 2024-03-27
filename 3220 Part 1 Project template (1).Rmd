@@ -72,7 +72,7 @@ Outline
  
 Graphs you can possibly include: 
 - Histogram of total income  (PEARNVAL)
-- Boxplot of total income (PEARNVAL) by highest education level (H_ED) or Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
+- Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
 - Scatterplot of Average Total Income by Gender across Different Urbanization Levels
 - Scatterplot of total income (PEARNVAL) by age
 - Boxplot or Scatterplot of total income (PEARNVAL) by health status (HEA) 
@@ -135,18 +135,30 @@ ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
   annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
            hjust=1.1, vjust=2, size=5, color="black")
   
-
 ### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
-
+incomeData$Majority_Sex<-cut(incomeData$SEX,
+                             breaks=c(0,1.5,2),
+                             labels=c("Male","Female"))
+ggplot(incomeData,aes(x=URB_PER,y=PEARNVAL,color=Majority_Sex)) +
+  geom_point() +
+  scale_color_manual(values=c("Male" = "blue",
+                              "Female" = "hotpink")) +
+  labs(x="Percentage of Urban Population",y="Personal Earnings (USD)",color="Majority Gender",title="% Urban Population vs Personal Earnings Grouped by Majority Gender")
 ```
 
 ```{r, echo=FALSE}
 dataForPlot<-incomeData[-6]
-par(mfrow=c(3,3))
+par(mfrow=c(3,2))
 for (i in names(dataForPlot)[3:9]) {
   if (which(names(dataForPlot) == i) == 4) next  # Skip the response variable
-  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earninngs")
+  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings")
 }
+
+dataForPlot<-incomeData[-6]
+for (i in names(dataForPlot)[3:11]) {
+  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings")
+}
+
 
    
 ```
@@ -188,8 +200,8 @@ need to do to make it suitable
 | Total Personal Earnings | PEARNVAL | Desc | 
 | Health Status | HEA | Desc | 
 | Unemployment Rate | UNEMP_RATE | Desc | 
-| Percentage of Urban Residents | URB_PER | Desc | 
 | Sales Tax Rate | TAX_RTE | Desc | 
+| Percentage of Urban Residents | URB_PER | Desc | 
 
 
 \newpage
