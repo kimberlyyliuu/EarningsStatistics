@@ -216,7 +216,6 @@ head(incomeData, n=15)
 ## Appendix C: References
 
 ### Background
-1. List your background citations here.
 
 Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://www.census.gov/programs-surveys/decennial-census/about/why.html#:~:text=The%20results%20of%20the%20census,%2C%20roads%2C%20and%20public%20works. 
 
@@ -225,7 +224,6 @@ Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so importan
 Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
 
 ### Data
-1. List your data citations here
 
 \begin{itemize}
   \item 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm
