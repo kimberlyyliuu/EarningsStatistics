@@ -42,9 +42,9 @@ Please type your names in the appropriate space below. Failing to do so will res
 ## Background
 
 \begin{itemize}
-  \item How does a higher level of educational attainment influence total income across different states, controlling for urbanization and tax rates?
-  \item What is the impact of being older, of different genders, and having better health status on total income in various levels of urbanization across states?
-  \item: Does a higher unemployment rate within a state, after adjusting for urban percentile and tax percentage, predict a lower average total income, and does this effect vary by sex? 
+  \item Does a higher level of educational attainment generally increase personal earnings income across different states?
+  \item Does personal earnings increase with an individual's health?
+  \item: Do older individuals generally earn more money than younger individuals? 
 \end{itemize}
 
 The Census is beyond a historical record or constitutional mandate. The decennial census plays a pivotal role in shaping the political and economic landscape of the nation. Through the meticulous surveying of every resident, the census results directly influence the allocation of hundreds of billions of dollars in federal funding to states, counties, and communities. This funding, critical for schools, hospitals, roads, and public works, is determined by population totals and breakdowns by sex, age, race, and other factors, ensuring that each community receives its fair share based on its specific needs (Bureau, 2021). Beyond funding, census data are instrumental in the equitable distribution of resources for over 100 federal programs, including Medicaid, Head Start, and SNAP. The accuracy of these counts ensures that funding is justly allocated, supporting health, education, housing, and infrastructure programs vital for community well-being.
