@@ -150,7 +150,7 @@ ggplot(incomeData,aes(x=URB_PER,y=PEARNVAL,color=Majority_Sex)) +
            hjust=1.5, vjust=2, size=5, color="black")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,include=F}
 dataForPlot<-incomeData[-6]
 par(mfrow=c(3,2))
 for (i in names(dataForPlot)[3:9]) {
@@ -204,9 +204,9 @@ need to do to make it suitable
 | Total Household Income | TOT_IN | Desc | 
 | Total Personal Earnings | PEARNVAL | Desc | 
 | Health Status | HEA | Desc | 
-| Unemployment Rate | UNEMP_RATE | Desc | 
-| Sales Tax Rate | TAX_RTE | Desc | 
-| Percentage of Urban Residents | URB_PER | Desc | 
+| Unemployment Rate | UNEMP_RATE | A quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values is from 0.0 (no unemployed persons in the state) to 100.0 (all persons in the state are unemployed). | 
+| Sales Tax Rate | TAX_RTE | A quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values is from 0.0 (0% sales tax) to 1.0 (100% sales tax). | 
+| Percentage of Urban Residents | URB_PER | A quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values is from 0.0 (none of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). | 
 
 
 \newpage
