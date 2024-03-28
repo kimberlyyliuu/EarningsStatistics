@@ -19,10 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 
 
 ```{r, include = FALSE}
-# Read in Final Version of Data from GitHub
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
-#install.packages("ggplot2")
-#install.packages("ggthemes")
 library(ggplot2)
 library(dplyr)
 library(ggthemes)
@@ -45,7 +42,7 @@ Please type your names in the appropriate space below. Failing to do so will res
 \begin{itemize}
   \item Does a higher level of educational attainment generally increase personal earnings income across different states?
   \item Does personal earnings increase with an individual's health?
-  \item: Do older individuals generally earn more money than younger individuals? 
+  \item Do older individuals generally earn more money than younger individuals? 
 \end{itemize}
 
 The Census is beyond a historical record or constitutional mandate. The decennial census plays a pivotal role in shaping the political and economic landscape of the nation. Through the meticulous surveying of every resident, the census results directly influence the allocation of hundreds of billions of dollars in federal funding to states, counties, and communities. This funding, critical for schools, hospitals, roads, and public works, is determined by population totals and breakdowns by sex, age, race, and other factors, ensuring that each community receives its fair share based on its specific needs (Bureau, 2021). Beyond funding, census data are instrumental in the equitable distribution of resources for over 100 federal programs, including Medicaid, Head Start, and SNAP. The accuracy of these counts ensures that funding is justly allocated, supporting health, education, housing, and infrastructure programs vital for community well-being.
@@ -78,15 +75,14 @@ Graphs you can possibly include:
 - Scatterplot of total income (PEARNVAL) by age
 - Boxplot or Scatterplot of total income (PEARNVAL) by health status (HEA) 
 
-
+Histogram of PEARNVAL
 ```{r}
-### Histogram of PEARNVAL
 ggplot(incomeData,aes(x=PEARNVAL)) +
-  geom_histogram(bins=20)+
+  geom_histogram(bins=20) +
   labs(x="Personal Earnings (USD)",y="Count",title="Distribution of Personal Earnings by State") +
   theme_linedraw()
 
-###  Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
+#Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
 incomeData$Education_Level <- cut(incomeData$H_ED,
                             breaks = c(39, 40, 41, 42, 43),
                             labels = c("Some College but No Degree",
@@ -104,7 +100,7 @@ ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
   labs(x = "Highest Education (Numeric)", y = "Personal Earnings (USD)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-### Scatterplot of total income (PEARNVAL) by age
+#Scatterplot of total income (PEARNVAL) by age
 agecor_coefficient <- cor(incomeData$AGE, incomeData$PEARNVAL, use = "complete.obs")
 ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
   geom_point() +
@@ -114,7 +110,7 @@ ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         plot.title = element_text(hjust = 0.5))
 
-###Scatterplot of total income (PEARNVAL) by health status (HEA) 
+#Scatterplot of total income (PEARNVAL) by health status (HEA) 
 incomeData$Health_Status<-cut(incomeData$HEA,
                               breaks= c(0,1,2,3,4,5),
                               labels= c("Excellent Health",
@@ -134,8 +130,8 @@ ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
   theme_linedraw() +
   annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
            hjust=1.1, vjust=2, size=5, color="black")
-  
-### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
+
+#Scatterplot of Average Total Income by Gender across Different Urbanization Levels
 urb_percor_coefficient<-cor(incomeData$URB_PER,incomeData$PEARNVAL)
 incomeData$Majority_Sex<-cut(incomeData$SEX,
                              breaks=c(0,1.5,2),
@@ -149,31 +145,8 @@ ggplot(incomeData,aes(x=URB_PER,y=PEARNVAL,color=Majority_Sex)) +
            hjust=1.5, vjust=2, size=5, color="black")
 ```
 
-```{r, echo=FALSE,include=F}
-dataForPlot<-incomeData[-6]
-par(mfrow=c(3,2))
-for (i in names(dataForPlot)[3:9]) {
-  if (which(names(dataForPlot) == i) == 4) next  # Skip the response variable
-  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings")
-}
-
-dataForPlot<-incomeData[-6]
-par(mfrow=c(3,3))
-for (i in names(dataForPlot)[3:11]) {
-  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings",title=i)
-}
-
-
-   
-```
-
-
-
-
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
-## Use this chunk to compute any summary statistics that you want to use
-## in your conclusions. 
-## These will not print in your report
+# Use this chunk to compute any summary statistics that you want to use in your conclusions. These will not print in your report
 ```
 
 ## Conclusion
@@ -205,13 +178,13 @@ need to do to make it suitable
 | Health Status | HEA | A categorical measure that reports the average health of a state's residents. This variable reports the average of state's residents' reportings to 5 possible levels that rank health status, 1 = Excellent, 2 = Very good, 3 = Good, 4 = Fair, and 5 = Poor. A non-integer value would indicate the state's residents are intermediate between the two categories corresponding to the adjacent integers. | 
 | Unemployment Rate | UNEMP_RATE | A quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values is from 0.0 (no unemployed persons in the state) to 100.0 (all persons in the state are unemployed). | 
 | Sales Tax Rate | TAX_RTE | A quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values is from 0.0 (0% sales tax) to 1.0 (100% sales tax). | 
-| Percentage of Urban Residents | URB_PER | A quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values is from 0.0 (none of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). | 
+| Percentage of Urban Residents | URB_PER | A quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values is from 0.0 (none of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). |
 
 
 \newpage
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
-head(incomeData, n=15)
+head(incomeData[1:12,],n=15)
 ```
 
 
@@ -220,18 +193,16 @@ head(incomeData, n=15)
 
 ### Background
 
-Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://www.census.gov/programs-surveys/decennial-census/about/why.html#:~:text=The%20results%20of%20the%20census,%2C%20roads%2C%20and%20public%20works. 
-
+Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://tinyurl.com/5fdyh82c
 Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so important?. Population Reference Bureau https://www.prb.org/resources/importance-of-u-s-census/ 
-
 Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
 
 ### Data
 
 \begin{itemize}
   \item 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm
-  \item 2010 Urban Percentage of Population:https://www.icip.iastate.edu/tables/population/urban-pct-states
+  \item 2010 Urban Percentage of Population: https://www.icip.iastate.edu/tables/population/urban-pct-states
   \item 2020 Tax Data: https://taxfoundation.org/data/all/state/2020-sales-taxes/
   \item Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
-  \item Codebook for 2020: https://www2.census.gov/programs-surveys/cps/datasets/2020/march/ASEC2020ddl_pub_full.pdf 
+  \item Codebook for 2020: "https://tinyurl.com/3h8vexva"
 \end{itemize}
