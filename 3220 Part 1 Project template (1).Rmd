@@ -137,6 +137,7 @@ ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
            hjust=1.1, vjust=2, size=5, color="black")
   
 ### Scatterplot of Average Total Income by Gender across Different Urbanization Levels
+urb_percor_coefficient<-cor(incomeData$URB_PER,incomeData$PEARNVAL)
 incomeData$Majority_Sex<-cut(incomeData$SEX,
                              breaks=c(0,1.5,2),
                              labels=c("Male","Female"))
@@ -144,7 +145,9 @@ ggplot(incomeData,aes(x=URB_PER,y=PEARNVAL,color=Majority_Sex)) +
   geom_point() +
   scale_color_manual(values=c("Male" = "blue",
                               "Female" = "hotpink")) +
-  labs(x="Percentage of Urban Population",y="Personal Earnings (USD)",color="Majority Gender",title="% Urban Population vs Personal Earnings Grouped by Majority Gender")
+  labs(x="Percentage of Urban Population",y="Personal Earnings (USD)",color="Majority Gender",title="% Urban Population vs Personal Earnings Grouped by Majority Gender") + 
+  annotate("text",x=Inf, y=Inf, label=paste("r = ", round(urb_percor_coefficient,3)), 
+           hjust=1.5, vjust=2, size=5, color="black")
 ```
 
 ```{r, echo=FALSE}
@@ -156,8 +159,9 @@ for (i in names(dataForPlot)[3:9]) {
 }
 
 dataForPlot<-incomeData[-6]
+par(mfrow=c(3,3))
 for (i in names(dataForPlot)[3:11]) {
-  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings")
+  plot(incomeData[,i], incomeData$PEARNVAL,xlab=i,ylab="Personal Earnings",title=i)
 }
 
 
