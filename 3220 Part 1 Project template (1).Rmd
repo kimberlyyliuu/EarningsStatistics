@@ -92,8 +92,7 @@ incomeData$Education_Level <- cut(incomeData$H_ED,
                             labels = c("Some College but No Degree",
                                        "Associate Degree - Occupational/Vocational",
                                        "Associate Degree - Academic Program",
-                                       "Bachelor's Degree"),
-                            include.lowest = TRUE)
+                                       "Bachelor's Degree"))
 
 ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
   geom_point() +
