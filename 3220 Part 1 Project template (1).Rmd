@@ -197,13 +197,13 @@ need to do to make it suitable
 
 ## Appendix A: Data Dictionary
 
-| State | State | Desc |
-| State by FIPS Code | STATE | Desc |
-| Highest Education | H_ED | Desc |
+| State | State | A categorical measure that identifies the state corresponding to the observation. The 51 possible levels are the 50 U.S. states and the District of Columbia. |
+| State by FIPS Code | STATE | A categorical measure that identifies the U.S. state (or D.C.) corresponding to the observation by a standardized numeric code. The 51 possible levels are discrete, ranging from 1-56, omitting 3, 7, 14, 43, and 52. |
+| Highest Education | H_ED |  
 | Gender | SEX | Desc |
 | Total Household Income | TOT_IN | Desc | 
 | Total Personal Earnings | PEARNVAL | Desc | 
-| Health Status | HEA | Desc | 
+| Health Status | HEA | A categorical measure that reports the average health of a state's residents. This variable reports the average of state's residents' reportings to 5 possible levels that rank health status, 1 = Excellent, 2 = Very good, 3 = Good, 4 = Fair, and 5 = Poor. A non-integer value would indicate the state's residents are intermediate between the two categories corresponding to the adjacent integers. | 
 | Unemployment Rate | UNEMP_RATE | A quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values is from 0.0 (no unemployed persons in the state) to 100.0 (all persons in the state are unemployed). | 
 | Sales Tax Rate | TAX_RTE | A quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values is from 0.0 (0% sales tax) to 1.0 (100% sales tax). | 
 | Percentage of Urban Residents | URB_PER | A quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values is from 0.0 (none of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). | 
