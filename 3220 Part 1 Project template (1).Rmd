@@ -76,7 +76,7 @@ Graphs you can possibly include:
 - Boxplot or Scatterplot of total income (PEARNVAL) by health status (HEA) 
 
 Histogram of PEARNVAL
-```{r}
+```{r,results=F}
 ggplot(incomeData,aes(x=PEARNVAL)) +
   geom_histogram(bins=20) +
   labs(x="Personal Earnings (USD)",y="Count",title="Distribution of Personal Earnings by State") +
@@ -130,20 +130,15 @@ ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
   theme_linedraw() +
   annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
            hjust=1.1, vjust=2, size=5, color="black")
-
-#Scatterplot of Average Total Income by Gender across Different Urbanization Levels
-urb_percor_coefficient<-cor(incomeData$URB_PER,incomeData$PEARNVAL)
-incomeData$Majority_Sex<-cut(incomeData$SEX,
-                             breaks=c(0,1.5,2),
-                             labels=c("Male","Female"))
-ggplot(incomeData,aes(x=URB_PER,y=PEARNVAL,color=Majority_Sex)) +
-  geom_point() +
-  scale_color_manual(values=c("Male" = "blue",
-                              "Female" = "hotpink")) +
-  labs(x="Percentage of Urban Population",y="Personal Earnings (USD)",color="Majority Gender",title="% Urban Population vs Personal Earnings Grouped by Majority Gender") + 
-  annotate("text",x=Inf, y=Inf, label=paste("r = ", round(urb_percor_coefficient,3)), 
-           hjust=1.5, vjust=2, size=5, color="black")
 ```
+
+The histogram titled Distribution of Personal Earnings by State depicts the distribution of the response variable PEARNVAL which represents the average earnings of individuals in each state/territory. The graph is unimodal, mostly normally distributed, and displays minimal right skew. Because of this, personal earnings are appropriate for linear regression analysis.
+
+	The scatterplot Education Attainment vs Personal Earnings displays the relationship between a state's average education and the average personal earnings of its citizens. The graph has a linear slope with a correlation coefficient of .8055 which suggests a strong relationship between the response and explanatory variable. There is one outlier, Washington DC, whose highest education and personal earnings is significantly higher than the rest.
+	
+	The Age vs Personal Earnings scatterplot shows the relationship between the average age of a state(excluding individuals under the age of 18) and the average personal earnings of the state. The data points seem to not display a pattern and the correlation coefficient of .1031 suggests that their is no linear relationship between the variables.
+
+  The Health Status vs Personal Earnings scatterplot seems to depict a relatively strong negative linear correlation and a correlation coefficient of -0.764 suggests this to be true. Again, Washington D.C. is an outlier. 
 
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 # Use this chunk to compute any summary statistics that you want to use in your conclusions. These will not print in your report
