@@ -62,21 +62,8 @@ During the data preparation process, several potential issues were considered. T
 
 ## Exploratory Data Analysis
 
-First, the Histogram of Personal Earnings displays the spread
-Outline 
-- must include histogram of response variable (total income)
-- must include at least four graphical representations and the report should address major features of the data.
-- You must include at least one summary that relate to each of your research questions in some way
- 
-Graphs you can possibly include: 
-- Histogram of total income  (PEARNVAL)
-- Scatterplot of total income (PEARNVAL) by highest education level (H_ED)
-- Scatterplot of Average Total Income by Gender across Different Urbanization Levels
-- Scatterplot of total income (PEARNVAL) by age
-- Boxplot or Scatterplot of total income (PEARNVAL) by health status (HEA) 
-
 Histogram of PEARNVAL
-```{r,results=F}
+```{r,include=F}
 ggplot(incomeData,aes(x=PEARNVAL)) +
   geom_histogram(bins=20) +
   labs(x="Personal Earnings (USD)",y="Count",title="Distribution of Personal Earnings by State") +
@@ -145,19 +132,13 @@ The histogram titled Distribution of Personal Earnings by State depicts the dist
 ```
 
 ## Conclusion
-Write up a conclusion that addresses the following: 
-  - About 1-1.5 page long
+The first graph, the histogram titled Distribution of Personal Earnings by State, depicts the distribution of the response variable PEARNVAL which represents the average earnings of individuals in each state/territory. The graph is unimodal and displays a relatively strong normal distribution pattern. The histogram is slightly skewed right suggesting that a majority of the states have personal earnings below the mean. There is one outlier in the data set, Washington DC, whose average personal earnings are much greater than any of the other states which could account for some of the skewness. Ultimately, personal earnings is appropriate for linear regression analysis due to the mostly normal distribution and unimodal shape of the histogram. 
+Next is the scatterplot depicting the average earnings per state compared to the average highest education level obtained in said state. In this graph, the x-axis contains the average education and is displayed numerically with larger numbers representing a higher education attainment. For example, the number 40 represents some college but no degree while the number 43 represents obtaining a bachelor's degree. The correlation coefficient in this scatterplot is .8055 which suggests a strong relationship between the explanatory and response variable. The scatterplot suggests that, in general, the higher a state's average educational attainment the higher the average personal earnings. Within the graph, there is one outlier, Washington D.C, however, it is not significant as it falls in line with the pattern created by the rest of the data and does not have a drastic impact on the correlation coefficient. The graph shows that states that average Occupational/Vocational Associate degrees commonly have the least personal earnings with Academic Associate degrees typically earning a bit more and Bachelor's degrees earning the most. In addition, the spread of the states with an average education level being associate degree - Occupational/Vocational is denser than the spread of states with an average of Associate Degree-Academic Program or bachelor degree suggesting that lower education attainments result in a smaller possible range of personal earnings. Overall, because of the strong correlation coefficient and the impact data the graph displays, the variable should be included in the model.
+The following scatterplot depicts the relationship between average earnings and the average age of individuals in each respective state. The numbers on the x-axis correspond to the average age of its citizens (not including individuals under 18) I.e., 41 represents 41 years old, 42 represents 42 years old, and so on. Visually, there is no form of relationship between these two variables and a correlation coefficient of only .1031 suggests that no linear relationship is present. Ultimately, this means that the average age of the citizens of a state has virtually no relationship to earnings. Washington D.C. is an outlier in this dataset but has no significance as an outlier. Ultimately, due to the low correlation coefficient and the lack of a distinctive pattern, age should not be included in the model.
+	After that is a scatterplot showing the relationship between Personal Earnings and the Health Status variables. Health Status is displayed numerically on the x-axis with lower numbers representing better health statuses. In the census dataset where we obtained the data, the health status responses ranged from 1-5 with the number one representing excellent health and the number five representing poor health. This graph depicts a strong negative linear relationship between the variables with the correlation coefficient being -0.764 strongly suggesting that health status decreases as personal earnings decrease. Ultimately, because of the strong correlation, Health Status should be included in a model.
+The final scatterplot depicts the relationship between the urban population percentage of a state and the average Personal earnings. In addition, the scatterplot groups the states by gender with blue representing states with a majority male population and pink representing states with a majority female population. The correlation coefficient of the graph is .579 signifying that there is a moderate correlation between urban population percentage and average personal earnings. The graph shows that the vast majority of states are male-dominated but the range of these male-dominated states is large suggesting that gender plays very little role in average earnings. There are only 5 female-dominated states but ⅗ of them lay in a cluster within the 70-80% urban population range which means there may be less of a earnings range for female-dominated states.  But, due to the two remaining women-dominated states being outliers, it is unclear if this cluster is meaningful or not. Ultimately, while the correlation is not the strongest, the urban population variable does still provide information and is viable for a model.
 
-
-Outline: 
-- interpret the graphical summaries 
-- make sure to tie these all to our 3 research questions
-- include a numerical summary that corresponds with the graphical summary 
-- include context if there are any large discrepancies 
-- use the code chunk above to compute any summary statistics that you want to use in your conclusions. 
-- include a description as to why your response variable is
-suitable for regression. If it is not suitable, you should discuss what you will
-need to do to make it suitable
+Overall, because of the graphs we created and the exploratory data analysis, we have preliminary answers to the research questions. First, it seems that higher educational attainments positively influence income meaning that the higher the state's average education, the higher the average income. For the second question, it seems that health status has a positive influence on income, however, at the moment, it seems that gender and age have no impact making this question ambiguous currently. Finally, even with the graphs and EDA, it is still unclear if impact unemployment has on average total income.
 
 
 \newpage
