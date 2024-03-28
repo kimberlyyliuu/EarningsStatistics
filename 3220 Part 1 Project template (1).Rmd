@@ -75,30 +75,35 @@ p1<-ggplot(incomeData,aes(x=PEARNVAL)) +
   geom_histogram(bins=10) +
   labs(x="Personal Earnings (USD)",y="Count",title="Distribution of Personal Earnings by State") +
   theme_linedraw() +
+  theme(axis.text.x = element_text(size=10),
+        axis.text.y = element_text(size=10),
+        title = element_text(size=15)) +
   scale_x_continuous(labels = function(x) format(x, scientific = FALSE))
 
 #Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
 incomeData$Education_Level <- cut(incomeData$H_ED,
                             breaks = c(39, 40, 41, 42, 43),
                             labels = c("Some College but No Degree",
-                                       "Associate Degree - Occupational/Vocational",
-                                       "Associate Degree - Academic Program",
-                                       "Bachelor's Degree"))
+                                       "Vocational Associate's",
+                                       "Academic Associate's",
+                                       "Bachelor's"))
 educor_coefficient<-cor(incomeData$H_ED,incomeData$PEARNVAL)
 p2<-ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
   geom_point() +
   scale_color_manual(values = c("High School Graduate" = "green",
                                 "Some College but No Degree" = "lightpink",
-                                "Associate Degree - Occupational/Vocational" = "blue",
-                                "Associate Degree - Academic Program" = "orange",
-                                "Bachelor's Degree" = "black")) +
+                                "Vocational Associate's" = "blue",
+                                "Academic Associate's" = "orange",
+                                "Bachelor's" = "black")) +
   labs(x = "Highest Education (Numeric)", y = "Personal Earnings (USD)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
   annotate("text", x = Inf, y = Inf, label = paste("r = ", round(educor_coefficient, 3)),
            hjust = 1.05, vjust = 3, size = 5, color = "black") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.text = element_text(size = 8), # Shrink the text in the legend
-        legend.title = element_text(size = 9), # Shrink the legend title
-        legend.key.size = unit(0.5, "cm")) # Adjust the size of the legend keys)
+  theme(axis.text.x = element_text(size= 10, angle = 45, hjust = 1),
+        axis.text.y = element_text(size=10),
+        title = element_text(size=15),
+        legend.text = element_text(size = 13), 
+        legend.title = element_text(size = 13),
+        legend.key.size = unit(0.5, "cm")) 
 
 #Scatterplot of total income (PEARNVAL) by age
 agecor_coefficient <- cor(incomeData$AGE, incomeData$PEARNVAL, use = "complete.obs")
@@ -107,8 +112,9 @@ p3<-ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
   labs(x = "Age", y = "Personal Earnings", title = "Age vs Personal Earnings") +
   annotate("text", x = Inf, y = Inf, label = paste("r = ", round(agecor_coefficient, 3)),
            hjust = 1.05, vjust = 2, size = 5, color = "black") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5))
+  theme(axis.text.x = element_text(size= 10, angle = 45, hjust = 1),
+        axis.text.y = element_text(size=10),
+        title = element_text(size=15))
 
 #Scatterplot of total income (PEARNVAL) by health status (HEA) 
 incomeData$Health_Status<-cut(incomeData$HEA,
@@ -129,14 +135,20 @@ p4<-ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
   labs(x="Health Status (Numeric)",y="Personal Earnings (USD)",color="Health Status",title="Health Status vs Personal Earnings") +
   theme_linedraw() +
   annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
-           hjust=1.1, vjust=2, size=5, color="black")
+           hjust=1.1, vjust=2, size=5, color="black") +
+    theme(axis.text.x = element_text(size= 10),
+        axis.text.y = element_text(size=10),
+        title = element_text(size=15),
+        legend.text = element_text(size = 13), 
+        legend.title = element_text(size = 13),
+        legend.key.size = unit(0.5, "cm")) 
 #Creating new variable (quant)
 incomeData$Majority_Sex<-cut(incomeData$SEX,
                              breaks=c(0,1.5,2),
                              labels=c("Male","Female"))
 ```
 
-```{r, echo=FALSE, fig.width=6, fig.height=8, out.width='0.50\\linewidth', out.height='0.95\\textheight', results="asis"}
+```{r, echo=FALSE, fig.width=7, fig.height=9, out.width='0.50\\linewidth', out.height='0.95\\textheight', results="asis"}
 plot_grid(p1, p2, ncol = 1, nrow = 2)
 plot_grid(p3, p4, ncol = 1, nrow = 2)
 ```
