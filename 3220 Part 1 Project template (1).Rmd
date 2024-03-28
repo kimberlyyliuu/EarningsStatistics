@@ -29,6 +29,10 @@ if (!requireNamespace("cowplot", quietly = TRUE)) {
 library(cowplot)
 ```
 
+```{r}
+
+```
+
 \newpage 
 
 # Pledege
@@ -126,6 +130,10 @@ p4<-ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) +
   theme_linedraw() +
   annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
            hjust=1.1, vjust=2, size=5, color="black")
+#Creating new variable (quant)
+incomeData$Majority_Sex<-cut(incomeData$SEX,
+                             breaks=c(0,1.5,2),
+                             labels=c("Male","Female"))
 ```
 
 ```{r, echo=FALSE, fig.width=6, fig.height=8, out.width='0.50\\linewidth', out.height='0.95\\textheight', results="asis"}
@@ -166,7 +174,7 @@ Overall, because of the graphs we created and the exploratory data analysis, we 
 \newpage
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
-head(incomeData[1:12,],n=15)
+head(incomeData,n=15)
 ```
 
 
