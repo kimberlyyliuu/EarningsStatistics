@@ -29,27 +29,6 @@ if (!requireNamespace("cowplot", quietly = TRUE)) {
 library(cowplot)
 ```
 
-```{r, include = FALSE}
-#Restoring Qualitative Variables from Numeric Averages
-incomeData$H_ED <- cut(incomeData$H_ED,
-                            breaks = c(39, 40, 41, 42, 43),
-                            labels = c("Some College but No Degree",
-                                       "Vocational Associate's",
-                                       "Academic Associate's",
-                                       "Bachelor's"))
-
-incomeData$HEA<-cut(incomeData$HEA,
-                              breaks= c(0,1,2,3,4,5),
-                              labels= c("Excellent Health",
-                                        "Very Good Health",
-                                        "Good Health",
-                                        "Fair Health",
-                                        "Poor Health"))
-incomeData$SEX<-cut(incomeData$SEX,
-                             breaks=c(0,1.5,2),
-                             labels=c("Male","Female"))
-```
-
 \newpage 
 
 # Pledege
@@ -153,17 +132,20 @@ median(incomeData$PEARNVAL)
 \newpage
 
 ## Appendix A: Data Dictionary
+Variables are reported in the following format:
+| Reference Name | Variable Name | Description | 
 
-| State | State | A categorical measure that identifies the state corresponding to the observation. The 51 possible levels are the 50 U.S. states and the District of Columbia. |
-| State by FIPS Code | STATE | A categorical measure that identifies the U.S. state (or D.C.) corresponding to the observation by a standardized numeric code. The 51 possible levels are discrete, ranging from 1-56, omitting 3, 7, 14, 43, and 52. |
-| Highest Education | H_ED |  
-| Gender | SEX | Desc |
-| Total Household Income | TOT_IN | Desc | 
-| Total Personal Earnings | PEARNVAL | Desc | 
-| Health Status | HEA | A categorical measure that reports the average health of a state's residents. This variable reports the average of state's residents' reportings to 5 possible levels that rank health status, 1 = Excellent, 2 = Very good, 3 = Good, 4 = Fair, and 5 = Poor. A non-integer value would indicate the state's residents are intermediate between the two categories corresponding to the adjacent integers. | 
-| Unemployment Rate | UNEMP_RATE | A quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values is from 0.0 (no unemployed persons in the state) to 100.0 (all persons in the state are unemployed). | 
-| Sales Tax Rate | TAX_RTE | A quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values is from 0.0 (0% sales tax) to 1.0 (100% sales tax). | 
-| Percentage of Urban Residents | URB_PER | A quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values is from 0.0 (none of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). |
+| State by FIPS Code | STATEFIPS | A qualitative measure that identifies the U.S. state (or D.C.) corresponding to the observation by a standardized numeric code. The 51 possible levels are discrete, ranging from 1-56, omitting 3, 7, 14, 43, and 52. |
+| State | State | A qualitative measure that identifies the state corresponding to the observation. The 51 possible levels are names of the 50 U.S. states and the District of Columbia. |
+| Educational Attainment | H_ED | A qualitative measure that identifies the average of highest education among adult residents of a given state. The three possible levels include a Vocational Associate's Degree, an Academic Associate's Degree, and a Bachelor's Degree. | 
+| Majority Sex | SEX | A qualitative measure that identifies the predominant sex among a state's adult residents. Two possible levels, male and female, indicate if the adult population of a state is predominately male or female. |
+| Health Status | HEA | A qualitative measure that reports the average health status of a state's residents. Two levels, very good health and good health indicate the average health status of a state's residents. | 
+| Personal Earnings | PEARNVAL | A continuous quantitative that reports the average personal earnings of a state's residents, reported in U.S. Dollars. Possible values within the data range from 45096.53 to 95387.40, indicating \$45096.53 and \$95387.40, respectively. | 
+| Total Household Income | TOT_IN | A quantitative measure that identifies the average total household income of adult residents of a state.  | 
+| Age | AGE | A continuous quantitative measure that reports the average age of a state's adult residents. Values range from 40.83460 to 46.39759. An age of 40.83460 indicates a person who is 40 years old and approximately 305 days old. | 
+| Unemployment Rate | UNEMP_RATE | A continuous quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values within the data is from 4.2 (4.2% of the adult aged population of the state is unemployed) to 13.5 (13.5% of the state's adult aged population is unemployed). | 
+| Sales Tax Rate | TAX_RTE | A continuous quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values within the data is from 0.0 (0% sales tax) to 0.07250 (7.25% sales tax). | 
+| Percentage of Urban Residents | URB_PER | A continuous quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values within the data is from 38.7 (38.7% of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). |
 
 
 \newpage
