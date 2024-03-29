@@ -77,7 +77,7 @@ p1<-ggplot(incomeData,aes(x=PEARNVAL)) +
   scale_x_continuous(labels = function(x) format(x, scientific = FALSE))
 
 #BOX PLOT of personal earnings (PEARNVAL) vs highest education level (H_ED)
-
+incomeData$H_ED <- factor(incomeData$H_ED, levels = c("Vocational Associate's", "Academic Associate's", "Bachelor's"))
 p2<-ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, fill = H_ED)) +
   geom_boxplot() +
   labs(x = "Educational Attainment", y = "Personal Earnings (USD)", fill = "Educational Attainment", title = "Personal Earnings by Educational Attainment across States") +
@@ -137,11 +137,11 @@ incomeData |>
 
 #Summary Stats for PEARNVAL V H_ED BOXPLOT:
 incomeData |>
-  filter(H_ED == "Good Health") |>
+  filter(H_ED == "Vocational Associate's") |>
   summary()
 
 incomeData |>
-  filter(H_ED == "Very Good Health") |>
+  filter(H_ED == "Academic Associate's") |>
   summary()
 
 incomeData |>
