@@ -104,7 +104,7 @@ p3<-ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
 
 p4<-ggplot(incomeData, aes(x=HEA,y=PEARNVAL,fill=HEA)) + 
   geom_boxplot() + 
-  labs(x="Health Status",y="Personal Earnings (USD)",fill="Health Status",title="Personal Earnings by Educational Attainment across States") +
+  labs(x="Health Status",y="Personal Earnings (USD)",fill="Health Status",title="Personal Earnings by Health Status across States") +
   theme_linedraw() +
   theme(axis.text.x = element_text(size= 10),
         axis.text.y = element_text(size=10),
@@ -122,8 +122,33 @@ plot_grid(p3, p4, ncol = 1, nrow = 2)
 
 
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
+#For histogram
 mean(incomeData$PEARNVAL)
 median(incomeData$PEARNVAL)
+
+#Summary Stats for PEARNVAL V HEA BOXPLOT:
+incomeData |>
+  filter(HEA == "Good Health") |>
+  summary()
+
+incomeData |>
+  filter(HEA == "Very Good Health") |>
+  summary()
+
+#Summary Stats for PEARNVAL V H_ED BOXPLOT:
+incomeData |>
+  filter(H_ED == "Good Health") |>
+  summary()
+
+incomeData |>
+  filter(H_ED == "Very Good Health") |>
+  summary()
+
+incomeData |>
+  filter(H_ED == "Bachelor's") |>
+  summary()
+
+
 ```
 
 ## Conclusion
