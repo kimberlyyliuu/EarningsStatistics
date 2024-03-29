@@ -143,8 +143,6 @@ incomeData$TOT_IN<-cut(incomeData$TOT_IN,
                                 "$70,000 to $72,499"))
 
 
-
-
 #Export
 write.csv(completeData, "completeData", row.names = F)
 ```
