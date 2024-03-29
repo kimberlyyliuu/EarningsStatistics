@@ -29,8 +29,25 @@ if (!requireNamespace("cowplot", quietly = TRUE)) {
 library(cowplot)
 ```
 
-```{r}
+```{r, include = FALSE}
+#Restoring Qualitative Variables from Numeric Averages
+incomeData$H_ED <- cut(incomeData$H_ED,
+                            breaks = c(39, 40, 41, 42, 43),
+                            labels = c("Some College but No Degree",
+                                       "Vocational Associate's",
+                                       "Academic Associate's",
+                                       "Bachelor's"))
 
+incomeData$HEA<-cut(incomeData$HEA,
+                              breaks= c(0,1,2,3,4,5),
+                              labels= c("Excellent Health",
+                                        "Very Good Health",
+                                        "Good Health",
+                                        "Fair Health",
+                                        "Poor Health"))
+incomeData$SEX<-cut(incomeData$SEX,
+                             breaks=c(0,1.5,2),
+                             labels=c("Male","Female"))
 ```
 
 \newpage 
@@ -80,32 +97,20 @@ p1<-ggplot(incomeData,aes(x=PEARNVAL)) +
         title = element_text(size=15)) +
   scale_x_continuous(labels = function(x) format(x, scientific = FALSE))
 
-#Scatterplot of personal income (PEARNVAL) vs highest education level (H_ED)
-incomeData$Education_Level <- cut(incomeData$H_ED,
-                            breaks = c(39, 40, 41, 42, 43),
-                            labels = c("Some College but No Degree",
-                                       "Vocational Associate's",
-                                       "Academic Associate's",
-                                       "Bachelor's"))
-educor_coefficient<-cor(incomeData$H_ED,incomeData$PEARNVAL)
-p2<-ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, color = Education_Level)) +
-  geom_point() +
-  scale_color_manual(values = c("High School Graduate" = "green",
-                                "Some College but No Degree" = "lightpink",
-                                "Vocational Associate's" = "blue",
-                                "Academic Associate's" = "orange",
-                                "Bachelor's" = "black")) +
-  labs(x = "Highest Education (Numeric)", y = "Personal Earnings (USD)", color = "Educational Attainment", title = "Educational Attainment vs Personal Earnings") +
-  annotate("text", x = Inf, y = Inf, label = paste("r = ", round(educor_coefficient, 3)),
-           hjust = 1.05, vjust = 3, size = 5, color = "black") +
-  theme(axis.text.x = element_text(size= 10, angle = 45, hjust = 1),
+#BOX PLOT of personal earnings (PEARNVAL) vs highest education level (H_ED)
+
+p2<-ggplot(incomeData, aes(x = H_ED, y = PEARNVAL, fill = H_ED)) +
+  geom_boxplot() +
+  labs(x = "Educational Attainment", y = "Personal Earnings (USD)", fill = "Educational Attainment", title = "Personal Earnings by Educational Attainment across States") +
+  theme(axis.text.x = element_text(size= 10, angle = 20, hjust = 1),
         axis.text.y = element_text(size=10),
-        title = element_text(size=15),
+        title = element_text(size=14),
         legend.text = element_text(size = 13), 
         legend.title = element_text(size = 13),
         legend.key.size = unit(0.5, "cm")) 
 
-#Scatterplot of total income (PEARNVAL) by age
+
+#Scatterplot of personal earnings (PEARNVAL) by age
 agecor_coefficient <- cor(incomeData$AGE, incomeData$PEARNVAL, use = "complete.obs")
 p3<-ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
   geom_point() +
@@ -116,36 +121,18 @@ p3<-ggplot(incomeData, aes(x = AGE, y = PEARNVAL)) +
         axis.text.y = element_text(size=10),
         title = element_text(size=15))
 
-#Scatterplot of total income (PEARNVAL) by health status (HEA) 
-incomeData$Health_Status<-cut(incomeData$HEA,
-                              breaks= c(0,1,2,3,4,5),
-                              labels= c("Excellent Health",
-                                        "Very Good Health",
-                                        "Good Health",
-                                        "Fair Health",
-                                        "Poor Health"))
-heacor_coefficient<-cor(incomeData$HEA,incomeData$PEARNVAL)
-p4<-ggplot(incomeData, aes(x=HEA,y=PEARNVAL,color=Health_Status)) + 
-  geom_point() + 
-  scale_color_manual(values=c("Excellent Health" = "purple",
-                              "Very Good Health" = "blue",
-                              "Good Health" = "orange",
-                              "Fair Health" = "black",
-                              "Poor Health" = "deepskyblue4")) +
-  labs(x="Health Status (Numeric)",y="Personal Earnings (USD)",color="Health Status",title="Health Status vs Personal Earnings") +
+#BOXPLOT of personal earnings (PEARNVAL) by health status (HEA) 
+
+p4<-ggplot(incomeData, aes(x=HEA,y=PEARNVAL,fill=HEA)) + 
+  geom_boxplot() + 
+  labs(x="Health Status",y="Personal Earnings (USD)",fill="Health Status",title="Personal Earnings by Educational Attainment across States") +
   theme_linedraw() +
-  annotate("text", x=Inf, y=Inf, label=paste("r = ", round(heacor_coefficient,3)), 
-           hjust=1.1, vjust=2, size=5, color="black") +
-    theme(axis.text.x = element_text(size= 10),
+  theme(axis.text.x = element_text(size= 10),
         axis.text.y = element_text(size=10),
-        title = element_text(size=15),
+        title = element_text(size=14),
         legend.text = element_text(size = 13), 
         legend.title = element_text(size = 13),
         legend.key.size = unit(0.5, "cm")) 
-#Creating new variable (quant)
-incomeData$Majority_Sex<-cut(incomeData$SEX,
-                             breaks=c(0,1.5,2),
-                             labels=c("Male","Female"))
 ```
 
 ```{r, echo=FALSE, fig.width=7, fig.height=9, out.width='0.50\\linewidth', out.height='0.95\\textheight', results="asis"}
