@@ -125,6 +125,26 @@ incomeData$SEX<-cut(incomeData$SEX,
 colnames(incomeData)[1]<-"STATEFIPS"
 
 incomeData<-incomeData[,-9]
+
+incomeData$TOT_IN<-cut(incomeData$TOT_IN,
+                       breaks=c(seq(16.5,29.5,by=1)),
+                       labels=c("$40,000 to $42,499",
+                                "$42,500 to $44,999",
+                                "$45,000 to $47,499",
+                                "$47,500 to $49,999",
+                                "$50,000 to $52,499",
+                                "$52,500 to $54,999",
+                                "$55,000 to $57,499",
+                                "$57,500 to $59,999",
+                                "$60,000 to $62,499",
+                                "$62,500 to $64,999",
+                                "$65,000 to $67,499",
+                                "$67,500 to $69,999",
+                                "$70,000 to $72,499"))
+
+
+
+
 #Export
 write.csv(completeData, "completeData", row.names = F)
 ```
