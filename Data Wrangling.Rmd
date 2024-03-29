@@ -103,7 +103,28 @@ TaxData<-TaxData[,1:3]
 # Merge with set, including State names for ease of interpretation
 completeData<-merge(finalData,TaxData,by.x="STATE", by.y="FIPS")
 completeData<-completeData[, c("State", setdiff(names(completeData), "State"))]
+#Restoring Qualitative Variables from Numeric Averages
+incomeData$H_ED <- cut(incomeData$H_ED,
+                            breaks = c(39, 40, 41, 42, 43),
+                            labels = c("Some College but No Degree",
+                                       "Vocational Associate's",
+                                       "Academic Associate's",
+                                       "Bachelor's"))
 
+incomeData$HEA<-cut(incomeData$HEA,
+                              breaks= c(0,1,2,3,4,5),
+                              labels= c("Excellent Health",
+                                        "Very Good Health",
+                                        "Good Health",
+                                        "Fair Health",
+                                        "Poor Health"))
+incomeData$SEX<-cut(incomeData$SEX,
+                             breaks=c(0,1.5,2),
+                             labels=c("Male","Female"))
+#Renaming for simplicity
+colnames(incomeData)[1]<-"STATEFIPS"
+
+incomeData<-incomeData[,-9]
 #Export
 write.csv(completeData, "completeData", row.names = F)
 ```
