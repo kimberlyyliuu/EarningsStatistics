@@ -223,16 +223,21 @@ head(incomeData,n=15)
 
 ### Background
 
-Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://tinyurl.com/5fdyh82c
-Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so important?. Population Reference Bureau https://www.prb.org/resources/importance-of-u-s-census/ 
-Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
+- Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://tinyurl.com/5fdyh82c
+
+- Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so important?. Population Reference Bureau https://www.prb.org/resources/importance-of-u-s-census/ 
+
+- Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
 
 ### Data
 
-\begin{itemize}
-  \item 2020 Unemployment Rates: https://www.bls.gov/lau/lastrk20.htm
-  \item 2010 Urban Percentage of Population: https://www.icip.iastate.edu/tables/population/urban-pct-states
-  \item 2020 Tax Data: https://taxfoundation.org/data/all/state/2020-sales-taxes/
-  \item Download for 2020: https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html
-  \item Codebook for 2020: "https://tinyurl.com/3h8vexva"
-\end{itemize}
+
+- 2020 Unemployment Rates: U.S. Bureau of Labor Statistics. (2024). Unemployment rates for states. U.S. Bureau of Labor Statistics. https://www.bls.gov/lau/lastrk20.htm 
+ 
+- Urban percentage of the population for states, historical. Urban Percentage of the Population for States, Historical | Iowa Community Indicators Program. (2024.). https://www.icip.iastate.edu/tables/population/urban-pct-states 
+
+- State and local sales tax rates, 2020. Tax Foundation. (2024, February 22). https://taxfoundation.org/data/all/state/2020-sales-taxes/ 
+
+- Bureau, U. C. (2022, October 27). 2020 annual social and economic supplements. Census.gov. https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html 
+
+- ASEC 2020 Public Use Data Dictionary. (2020). https://tinyurl.com/3h8vexva
