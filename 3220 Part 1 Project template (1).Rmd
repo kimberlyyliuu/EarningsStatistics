@@ -187,10 +187,6 @@ A qualitative measure that identifies the predominant sex among a state's adult 
 
 A qualitative measure that reports the average health status of a state's residents. Two levels, very good health and good health indicate the average health status of a state's residents. 
 
-| \textbf{Total Household Income} | TOT_IN |
-
-A qualitative measure that identifies the average total household income of adult residents of a state. 13 possible levels in the data range from \$42,500 to \$44,999 to \$70,000 to \$72,499, each capturing a \$2,499 range in household income. 
-
 | \textbf{Personal Earnings} | PEARNVAL | 
 
 A continuous quantitative that reports the average personal earnings of a state's residents, reported in U.S. Dollars. Possible values within the data range from 45096.53 to 95387.40, indicating \$45096.53 and \$95387.40, respectively. 
@@ -211,6 +207,9 @@ A continuous quantitative measure of a state's sales tax. Sales Tax Rate is repo
 
 A continuous quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values within the data is from 38.7 (38.7% of the state's population lives in an urban area) to 100.0 (the entirety of the state's population lives in urban areas). 
 
+| \textbf{Work Expenses} | WRK_SPND |
+
+A continuous quantitative measure that identifies the average amount of money spent on work-related expenses among residents of a state, reported in U.S. Dollars. Possible values in the data range from \$1101.676 to \$1463.411. |
 
 \newpage
 ## Appendix B: Data Rows
