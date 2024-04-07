@@ -1,0 +1,80 @@
+---
+title: "Insert heading" 
+author: "Group Name"
+fontsize: 12pt
+geometry: margin=1in
+urlcolor: black
+output: pdf_document
+header-includes:
+- \usepackage{setspace}
+- \onehalfspacing
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
+```
+
+```{r, echo=FALSE, warning=FALSE,results=FALSE}
+## Use this chunk for reading in packages.
+## Use this chunk for reading in the data, combining the data, and any other major data cleaning that is not relevant to show.
+## Remove the ## before all code.
+```
+
+\begin{center}
+
+#\includegraphics{/Users/kristavaranyak/Downloads/normaldist.jpeg}
+remove the pound sign and insert the file path to the image on your computer in the {}
+
+\end{center}
+
+\newpage 
+
+## Introduction
+
+## Methods and Analysis
+
+## Results
+
+## Conclusions
+
+\newpage
+
+## Appendix A: Data Dictionary
+
+|Variable Name|Abbreviated Name|Description|
+|:----:|:----:|:----:|
+| Variable 1 Full Name |Abbreviated1  | Write the description of the variable  |
+| Variable 2 Full Name |Abbreviated2  | Write the description of the variable  |
+
+\newpage
+## Appendix B: Data Rows
+```{r, echo=FALSE}
+# Use head() function to output first several rows
+
+```
+
+\newpage
+## Appendix C: Tables and Figures
+```{r, echo=FALSE, warning=FALSE,results=FALSE}
+## This code chunk can be used to execute any functions or summaries 
+## that will not be included in your appendix
+```
+
+```{r, echo=FALSE}
+## Use this section to output the summary of your final model
+## Include the relevant plots from EDA, assumptions, and your additional techniques
+## This should NOT be a dump of all of your plots and outputs.
+## Refer to the Rmarkdown guide for sizing information on your plots
+```
+
+\newpage
+## Appendix D: References
+
+### Background
+1. List your background citations here.
+
+### Data
+1. List your data citations here
+
+### Supplemental Code and Analysis Help
+1. List your references used to learn more about your techniques and coding here
