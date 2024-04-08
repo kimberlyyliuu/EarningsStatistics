@@ -7,6 +7,8 @@ urlcolor: black
 output: pdf_document
 header-includes:
 - \usepackage{setspace}
+- \usepackage{ulem}
+- \usepackage{hyperref}
 - \onehalfspacing
 ---
 
@@ -18,11 +20,18 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ## Use this chunk for reading in packages.
 ## Use this chunk for reading in the data, combining the data, and any other major data cleaning that is not relevant to show.
 ## Remove the ## before all code.
+incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+if (!requireNamespace("cowplot", quietly = TRUE)) {
+  install.packages("cowplot")
+}
+library(cowplot)
 ```
 
 \begin{center}
 
-#\includegraphics{/Users/kristavaranyak/Downloads/normaldist.jpeg}
 remove the pound sign and insert the file path to the image on your computer in the {}
 
 \end{center}
@@ -30,14 +39,42 @@ remove the pound sign and insert the file path to the image on your computer in 
 \newpage 
 
 ## Introduction
+
+The research question(s); Background/significance of the research;
+and relevant highlighted information about the data set. (abbreviated version of
+part 1)
+
 Given the rise in inflation and cost of living, exploring the relationships connected to personal earnings across different states is fundamental to understanding how factors like education, health status, and age, influence income disparities at a regional level. This inquiry is grounded in the longstanding debate within economic and social research regarding the return on investment in education, health, and wellness. By examining these relationships across diverse geographical areas, the analysis can uncover nuanced insights into how local economies, policies, and opportunities shape the economic benefits of educational attainment. This approach tackles crucial societal issues related to our economy by revealing the controllable factors correlated with high earners, providing insights into the social class hierarchy that revolves around income and career.
 
 The U.S. Census is pivotal in shaping the nation’s political and economic landscape; its results directly influence the allocation of federal funds toward schools, hospitals, public works, and roads, determined by breakdowns and totals for practically countless variables. The accurate reporting of this data is crucial to ensure each community receives its fair share based on its specific needs (Bureau, 2021). Census data is also crucial to the political sphere with its use in redrawing a multitude of political boundaries to ensure each district contains roughly equal numbers of people (Mather & Scommegna, 2019).  Its political importance extends even to the U.S. House of Representatives, which bases its apportionment of House seats on Census population data, safeguarding the equity of voting power within the nation (Farley, 2020). Ultimately, the Census is vital in the assurance of a fair and functional democracy, extending deep into American life underscoring the importance of its comprehensive methods.
 ## Methods and Analysis
 
+Include EDA from Report 1 
+
+ANALYSIS: 
+- Multiple linear regression logistic regression 
+- Include required analysis steps
+• Include the ”added techniques” that you selected
+• Assessing the model.
+• Selecting a final ”best” model.
+• NOTE: Your analysis should follow the appropriate order on your poster with a
+logical flow
+```{r}
+
+```
+
 ## Results
+The statistical interpretation of the final model. This should be in
+statistical terms and overall interpreting and assessing the statistical usefulness
+of the model with the appropriate metrics. There should be no R output (that
+will go in the appendix). However, you will include your final model.
+
+
 
 ## Conclusions
+- interpreting your results of the analyses in context of the problem
+- commenting on areas of future improvements.
+
 
 \newpage
 
@@ -62,7 +99,7 @@ The U.S. Census is pivotal in shaping the nation’s political and economic land
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
 # Use head() function to output first several rows
-
+head(incomeData,n=15)
 ```
 
 \newpage
@@ -70,6 +107,9 @@ The U.S. Census is pivotal in shaping the nation’s political and economic land
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 ## This code chunk can be used to execute any functions or summaries 
 ## that will not be included in your appendix
+##Fi gures and Tables Final model output and plots. This should only be a
+## summary of your final model. This is limited to 3 pages.
+
 ```
 
 ```{r, echo=FALSE}
@@ -83,10 +123,21 @@ The U.S. Census is pivotal in shaping the nation’s political and economic land
 ## Appendix D: References
 
 ### Background
-1. List your background citations here.
+- Bureau, U. C. (2021, November 23). Why we conduct the decennial census of Population and Housing. Census.gov. https://tinyurl.com/5fdyh82c
+
+- Mather, M., & Scommegna, P. (2019, March 15). Why is the U.S. Census so important?. Population Reference Bureau https://www.prb.org/resources/importance-of-u-s-census/ 
+
+- Farley, R. (2020, January 31). The importance of census 2020 and the challenges of getting a complete count. Harvard Data Science Review. https://hdsr.mitpress.mit.edu/pub/rosc6trb/release/3 
 
 ### Data
-1. List your data citations here
+- 2020 Unemployment Rates: U.S. Bureau of Labor Statistics. (2024). Unemployment rates for states. U.S. Bureau of Labor Statistics. https://www.bls.gov/lau/lastrk20.htm 
+ 
+- Urban percentage of the population for states, historical. Urban Percentage of the Population for States, Historical | Iowa Community Indicators Program. (2024.). https://www.icip.iastate.edu/tables/population/urban-pct-states 
 
+- State and local sales tax rates, 2020. Tax Foundation. (2024, February 22). https://taxfoundation.org/data/all/state/2020-sales-taxes/ 
+
+- Bureau, U. C. (2022, October 27). 2020 annual social and economic supplements. Census.gov. https://www.census.gov/data/datasets/2020/demo/cps/cps-asec-2020.html 
+
+- ASEC 2020 Public Use Data Dictionary. (2020). https://tinyurl.com/3h8vexva
 ### Supplemental Code and Analysis Help
 1. List your references used to learn more about your techniques and coding here
