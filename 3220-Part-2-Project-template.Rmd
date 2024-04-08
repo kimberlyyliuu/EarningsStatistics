@@ -44,9 +44,23 @@ The research question(s); Background/significance of the research;
 and relevant highlighted information about the data set. (abbreviated version of
 part 1)
 
-Given the rise in inflation and cost of living, exploring the relationships connected to personal earnings across different states is fundamental to understanding how factors like education, health status, and age, influence income disparities at a regional level. This inquiry is grounded in the longstanding debate within economic and social research regarding the return on investment in education, health, and wellness. By examining these relationships across diverse geographical areas, the analysis can uncover nuanced insights into how local economies, policies, and opportunities shape the economic benefits of educational attainment. This approach tackles crucial societal issues related to our economy by revealing the controllable factors correlated with high earners, providing insights into the social class hierarchy that revolves around income and career.
+\begin{itemize}
+  \item Does a higher level of educational attainment generally increase personal earnings income across different states?
+  \item Does personal earnings increase with an individual's health?
+  \item Do older individuals generally earn more money than younger individuals? 
+\end{itemize}
 
-The U.S. Census is pivotal in shaping the nation’s political and economic landscape; its results directly influence the allocation of federal funds toward schools, hospitals, public works, and roads, determined by breakdowns and totals for practically countless variables. The accurate reporting of this data is crucial to ensure each community receives its fair share based on its specific needs (Bureau, 2021). Census data is also crucial to the political sphere with its use in redrawing a multitude of political boundaries to ensure each district contains roughly equal numbers of people (Mather & Scommegna, 2019).  Its political importance extends even to the U.S. House of Representatives, which bases its apportionment of House seats on Census population data, safeguarding the equity of voting power within the nation (Farley, 2020). Ultimately, the Census is vital in the assurance of a fair and functional democracy, extending deep into American life underscoring the importance of its comprehensive methods.
+Given the rise in inflation and cost of living, exploring the relationships connected to personal earnings across different states is fundamental to understanding how factors like education, health status, and age, influence income disparities at a regional level.This inquiry is grounded in the longstanding debate within economic and social research regarding the return on investment in education, health, and wellness. By examining these relationships across diverse geographical areas, the analysis can uncover nuanced insights into how local economies, policies, and opportunities shape the economic benefits of educational attainment. 
+
+The U.S. Census is pivotal in the nation's political and economic framework, ensuring each community receives its fair share based on its specific needs (Bureau, 2021).
+
+In addition, it is crucial to the political sphere with its use in redrawing a multitude of political boundaries to ensure each district contains roughly equal numbers of people (Mather & Scommegna, 2019). Its political importance extends even to the U.S. House of Representatives, which bases its apportionment of House seats on Census population data, safeguarding the equity of voting power within the nation (Farley, 2020). 
+
+
+Originating from multiple reputable sources, the dataset focuses on the United States demographic, economic, and educational landscapes as of 2020. It's based on the US Census Bureau's Annual Social and Economic Supplement (ASEC) survey, including the Current Population Survey (CPS) for employment statistics, and adds questions on poverty and migration. Unemployment data comes from the Bureau of Labor Statistics, and urban population percentages from the Census Bureau's Decennial Census. State sales tax rates, sourced from the Tax Foundation, provide a financial perspective.
+
+The dataset was merged on a state basis, focusing on individuals 18 and older to better represent the adult population. It includes averages of education level, gender, work expenses, and age from the ASEC survey, combined with unemployment rates from the Bureau of Labor Statistics and sales tax rates from the Tax Foundation at the state level. 
+
 ## Methods and Analysis
 
 Include EDA from Report 1 
