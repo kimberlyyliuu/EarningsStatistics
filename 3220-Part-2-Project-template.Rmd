@@ -73,6 +73,22 @@ ANALYSIS:
 • Selecting a final ”best” model.
 • NOTE: Your analysis should follow the appropriate order on your poster with a
 logical flow
+
+Model building with significance testing (should be supported by EDA and/or variable
+screening)
+• Identify and check for multicollinearity
+• Residual analysis (assumptions + extreme observations) Make necessary adjustments as
+you see fit. If you are attempting to correct a violation, you only need to try up to three
+corrections, if the first doesn’t work. Include plots or output as needed.
+• Final model selected should be assessed. It may not be great, but you will explain that in
+conclusion
+• Include at least ONE additional techniques from the list to add to your analysis:
+Weighted least squares (Ch 9.4), External Model validation (Ch 5.11), box -cox
+transformation (supplemental), or another technique or aspect of MLR you learned on
+your own.
+• NOTE: if you have a unique situation with your data- discuss your analysis plan with Prof
+Varanyak
+
 ```{r}
 
 ```
