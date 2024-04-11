@@ -151,3 +151,34 @@ Read in Final Version of Data from GitHub
 ```{r}
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
 ```
+
+Stupid additional Var: FIN_YN
+```{r}
+personal<-pppub20
+household<-hhpub20
+
+psubset<-personal|>
+  filter(A_AGE >= 18)
+
+psubset<-psubset[c("PERIDNUM","PRSWKXPNS","A_AGE")]
+colnames(psubset)<-c("IDNUM_MATCHER","WRK_EXP","AGE")
+
+
+hsubset<-household[(c("H_IDNUM","GESTFIPS"))]
+colnames(hsubset)<-c("IDNUM","STATE")
+
+# Abbreviating the first set's ID:
+psubset$IDNUM_MATCHER<-substring(psubset$IDNUM_MATCHER, 1, nchar(psubset$IDNUM_MATCHER)-2)
+
+# Merging firstset with secondset
+statesubset<-merge(psubset, hsubset, by.x = "IDNUM_MATCHER", by.y = "IDNUM")
+
+newvar <- statesubset |>
+  group_by(STATE) |>
+  summarize(across(2:2, mean, na.rm = T))
+test1<-incomeData
+test1<-merge(incomeData,newvar,by.x="STATEFIPS",by.y="STATE")
+test1<-test1[,-6]
+colnames(test1)[11]<-"WRK_SPND"
+completeData<-test1
+```
