@@ -28,6 +28,9 @@ if (!requireNamespace("cowplot", quietly = TRUE)) {
   install.packages("cowplot")
 }
 library(cowplot)
+library(corrplot)
+library(olsrr)
+library(car)
 ```
 
 \begin{center}
@@ -90,7 +93,36 @@ your own.
 Varanyak
 
 ```{r}
+# From the EDA, we saw that the level "Bachelors" for H_ED only had one response. It also had significantly higher PEARNVAL than any other response. To prevent extrapolation and excessive skew, we should remove this from the data, especially if we are going to use H_ED as a predictor in the model
+#Displaying unequal responses to levels: 
+incomeData |>
+  group_by(H_ED) |>
+  summarise(count=n())
+#Subsetting out DC: 
+incomeData<-incomeData |>
+  filter(STATEFIPS != 11)
 
+#Model with all predictors: 
+incomemod1<-lm(PEARNVAL~AGE+UNEMP_RATE+TAX_RTE+URB_PER+WRK_SPND+HEA+SEX+H_ED,data=incomeData)
+summary(incomemod1)
+#Results in a globally significant model
+
+#Checking for influential observations:
+influencePlot(incomemod1)
+residualPlots(incomemod1,tests=F)
+plot(incomemod1,which=2)
+hist(residuals(incomemod1))
+
+
+
+#Checking for multicollinearity
+cor(incomeData[7:11])
+quantincomeData<-incomeData[7:11]
+corrplot(cor(quantincomeData))
+#No significant multicollinearity between quantitative variables
+
+#Building a model using step wise regression
+ols_step_both_p(incomemod1,pent=0.15,prem=0.15,details=T)
 ```
 
 ## Results
@@ -117,12 +149,12 @@ will go in the appendix). However, you will include your final model.
 | **Educational Attainment**             | `H_ED`            | A qualitative measure that identifies the average of highest education among adult residents of a given state. The three possible levels include a Vocational Associate's Degree, an Academic Associate's Degree, and a Bachelor's Degree.                        |
 | **Majority Sex**                       | `SEX`             | A qualitative measure that identifies the predominant sex among a state's adult residents. Two possible levels, male and female, indicate if the adult population of a state is predominately male or female.                                                   |
 | **Health Status**                      | `HEA`             | A qualitative measure that reports the average health status of a state's residents. Two levels, very good health and good health indicate the average health status of a state's residents.                                                                    |
-| **Personal Earnings**                  | `PEARNVAL`        | A continuous quantitative measure that reports the average personal earnings of a state's residents, reported in U.S. Dollars. Possible values within the data range from $45096.53 to $95387.40.                                                               |
+| **Personal Earnings**                  | `PEARNVAL`        | A continuous quantitative measure that reports the average personal earnings of a state's residents, reported in U.S. Dollars. Possible values within the data range from \$45096.53 to \$95387.40.                                                               |
 | **Age**                                | `AGE`             | A continuous quantitative measure that reports the average age of a state's adult residents in years. Values range from 40.83460 to 46.39759.                                                                                                                    |
 | **Unemployment Rate**                  | `UNEMP_RATE`      | A continuous quantitative measure of a state's unemployment rate from 2020. Unemployment rate is reported as a percentage; the range of possible values within the data is from 4.2% to 13.5%.                                                                  |
 | **Sales Tax Rate**                     | `TAX_RTE`         | A continuous quantitative measure of a state's sales tax. Sales Tax Rate is reported as a numerical figure; the range of possible values within the data is from 0.0% (0% sales tax) to 7.25% (7.25% sales tax).                                                |
 | **Percentage of Urban Residents**      | `URB_PER`         | A continuous quantitative measure of a state's proportion of urban residents to nonurban residents. This variable is reported as a percentage; the range of possible values within the data is from 38.7% to 100.0%.                                            |
-| **Work Expenses**                      | `WRK_SPND`        | A continuous quantitative measure that identifies the average amount of money spent on work-related expenses among residents of a state, reported in U.S. Dollars. Possible values in the data range from $1101.676 to $1463.411.                                |
+| **Work Expenses**                      | `WRK_SPND`        | A continuous quantitative measure that identifies the average amount of money spent on work-related expenses among residents of a state, reported in U.S. Dollars. Possible values in the data range from \$1101.676 to \$1463.411.                                |
 
 
 \newpage
@@ -137,7 +169,7 @@ head(incomeData,n=15)
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 ## This code chunk can be used to execute any functions or summaries 
 ## that will not be included in your appendix
-##Fi gures and Tables Final model output and plots. This should only be a
+##Figures and Tables Final model output and plots. This should only be a
 ## summary of your final model. This is limited to 3 pages.
 
 ```
