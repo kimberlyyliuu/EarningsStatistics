@@ -104,13 +104,15 @@ incomeData<-incomeData |>
 
 ##EDA to explore variables in relation to the response, PEARNVAL
 #Scatter plots for quantitative:
-plot(incomeData$AGE,incomeData$PEARNVAL)
-plot(incomeData$UNEMP_RATE,incomeData$PEARNVAL)
-plot(incomeData$TAX_RTE,incomeData$PEARNVAL)
-plot(incomeData$URB_PER,incomeData$PEARNVAL)
-plot(incomeData$WRK_SPND,incomeData$PEARNVAL)
+par(mfrow = c(2, 3))
+plot(incomeData$AGE,incomeData$PEARNVAL,xlab="AGE",ylab="PEARNVAL")
+plot(incomeData$UNEMP_RATE,incomeData$PEARNVAL,xlab="UNEMP_RATE",ylab="PEARNVAL")
+plot(incomeData$TAX_RTE,incomeData$PEARNVAL,xlab="TAX_RTE",ylab="PEARNVAL")
+plot(incomeData$URB_PER,incomeData$PEARNVAL,xlab="URB_PER",ylab="PEARNVAL")
+plot(incomeData$WRK_SPND,incomeData$PEARNVAL,xlab="WRK_SPND",ylab="PEARNVAL")
 
 #Boxplots for qualitative:
+par(mfrow=c(1,3))
 boxplot(PEARNVAL~H_ED,data=incomeData)
 boxplot(PEARNVAL~SEX,data=incomeData)
 boxplot(PEARNVAL~HEA,data=incomeData)
@@ -163,6 +165,23 @@ incomemod3<-lm(PEARNVAL~H_ED+HEA+AGE,data=incomeData)
 summary(incomemod3)
 #Globally significant model, but HEA and AGE are individually insignificant
 ```
+Stage 1 - Quantitative Variables
+Initial: $PEARNVAL = \beta_0 + \beta_1UNEMP\_RATE + \beta_2TAX\_RTE +\beta_3URB\_PER + \beta_4WRK\_SPND$
+```{r}
+incomemods1<-lm(PEARNVAL~UNEMP_RATE+TAX_RTE+URB_PER+WRK_SPND,data=incomeData)
+summary(incomemods1)
+```
+Final: $PEARNVAL = \beta_0 + \beta_1URB\_PER + \beta_2WRK\_SPND$
+
+Stage 2 - Qualitative Variables
+Initial: $PEARNVAL = \beta_0 + \beta_1URB\_PER + \beta_2WRK\_SPND + \beta_3H\_EDassociates + \beta_4HEAverygoodhealth$
+```{r}
+incomemods2<-lm(PEARNVAL~URB_PER+WRK_SPND+H_ED+HEA,data=incomeData)
+summary(incomemods2)
+```
+Final: $PEARNVAL = \beta_0 + \beta_1URB\_PER + \beta_2WRK\_SPND + \beta_3H\_EDassociates$
+
+Stage 3 - Interactions
 
 ## Results
 The statistical interpretation of the final model. This should be in
