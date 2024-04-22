@@ -93,7 +93,7 @@ your own.
 Varanyak
 
 ```{r}
-# From the EDA, we saw that the level "Bachelors" for H_ED only had one response. It also had significantly higher PEARNVAL than any other response. To prevent extrapolation and excessive skew, we should remove this from the data, especially if we are going to use H_ED as a predictor in the model
+## From the EDA, we saw that the level "Bachelors" for H_ED only had one response. It also had significantly higher PEARNVAL than any other response. To prevent extrapolation and excessive skew, we should remove this from the data, especially if we are going to use H_ED as a predictor in the model
 #Displaying unequal responses to levels: 
 incomeData |>
   group_by(H_ED) |>
@@ -102,27 +102,48 @@ incomeData |>
 incomeData<-incomeData |>
   filter(STATEFIPS != 11)
 
-#Model with all predictors: 
+##Model with all predictors: 
 incomemod1<-lm(PEARNVAL~AGE+UNEMP_RATE+TAX_RTE+URB_PER+WRK_SPND+HEA+SEX+H_ED,data=incomeData)
 summary(incomemod1)
 #Results in a globally significant model
 
-#Checking for influential observations:
+##Checking first model for influential observations:
 influencePlot(incomemod1)
+#Using the Studentized residual threshold of an absolute value of 2, there are 2 outliers, corresponding to observations 9 and 11.
+
 residualPlots(incomemod1,tests=F)
+#Looking at residual plot, there appears to be a fanning relationship with residuals for UNEMP_RATE and potentially WRK_SPND
+
 plot(incomemod1,which=2)
+#QQplot is approximately linear
+
 hist(residuals(incomemod1))
+#residuals are approximately normally distributed
 
-
-
-#Checking for multicollinearity
+##Checking for multicollinearity
 cor(incomeData[7:11])
 quantincomeData<-incomeData[7:11]
 corrplot(cor(quantincomeData))
 #No significant multicollinearity between quantitative variables
 
-#Building a model using step wise regression
+##Building a model using step wise regression
 ols_step_both_p(incomemod1,pent=0.15,prem=0.15,details=T)
+incomemod2<-lm(PEARNVAL~H_ED+URB_PER,data=incomeData)
+summary(incomemod2)
+#Results in a globally significant model
+
+##Checking second model for influential observations:
+influencePlot(incomemod2)
+#Again, two influential observations (11 and 21)
+
+residualPlots(incomemod2,tests=F)
+#No problems with residuals
+
+plot(incomemod2,which=2)
+#Approximate linearity, but worse than first model
+
+hist(residuals(incomemod2))
+#Residuals approximately normal, but distribution worse (less normal) than first model
 ```
 
 ## Results
