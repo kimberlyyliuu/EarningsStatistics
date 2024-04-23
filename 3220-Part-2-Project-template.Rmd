@@ -27,9 +27,6 @@ library(ggthemes)
 if (!requireNamespace("cowplot", quietly = TRUE)) {
   install.packages("cowplot")
 }
-if (!requireNamespace("caret", quietly = TRUE)) {
-  install.packages("caret")
-}
 library(cowplot)
 library(corrplot)
 library(olsrr)
@@ -266,8 +263,16 @@ The statistical interpretation of the final model. This should be in
 statistical terms and overall interpreting and assessing the statistical usefulness
 of the model with the appropriate metrics. There should be no R output (that
 will go in the appendix). However, you will include your final model.
-$PEARNVAL = \beta_0 + \beta_1URB\_PER + \beta_2H\_EDassociates$
-$PEARNVAL = 47415.205 + 191.569URB\_PER -6997.660H\_EDassociates$
+$PEARNVAL = \beta_0 + \beta_1URB\_PER + \beta_2H\_EDvocationalassociates$
+$PEARNVAL = 47408.52 + 191.95URB\_PER -7017.40H\_EDvocationalassociates$
+
+$PEARNVAL = 47408.52 + 191.95URB\_PER -7017.40H\_EDvocationalassociates$
+For Virginia: URB_PER = 75.5; H_EDvocationalassociates = 0
+```{r}
+47408.52 + 191.95*75.5 - 7017.40*0
+```
+Predicted value: 61900.74
+Actual Value: 71818.63
 
 ## Conclusions
 - interpreting your results of the analyses in context of the problem
