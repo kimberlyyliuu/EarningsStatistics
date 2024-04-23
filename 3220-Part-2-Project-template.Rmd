@@ -258,34 +258,7 @@ subsetincomeData<-incomeData[-c(11,19,45,21),]
 subsetincomemod<-lm(PEARNVAL~URB_PER+H_ED,data=subsetincomeData)
 summary(subsetincomemod)
 ```
-Assessing the Model through an External Validation Technique: Data splitting
-```{r}
-##Sufficient size assumption met: 
-#Yes: n=46>2k+25
-#     n=46>29
-#Randomly split the data into exact number of cases: 
-v<-as.vector(c(rep(TRUE,23),rep(FALSE,23)))
-select<-sample(v)
-dataforestimation<-subsetincomeData[select,]
-dataforprediction<-subsetincomeData[!select,]
-nrow(dataforestimation)
-nrow(dataforprediction)
 
-### Training
-model.vsa <- lm(PEARNVAL~URB_PER+H_ED, data=dataforestimation)
-
-
-### Testing
-predictions.vsa <- model.vsa %>% predict(test.vsa)
-
-
-### Evaluating
-data.frame(RMSE = RMSE(predictions.vsa, test.vsa$PEARNVAL),
-           R2 = R2(predictions.vsa, test.vsa$PEARNVAL),
-           MAE = MAE(predictions.vsa, test.vsa$PEARNVAL))
-
-
-```
 
 
 ## Results
