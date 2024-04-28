@@ -42,12 +42,11 @@ part 1)
   \item Do older individuals generally earn more money than younger individuals? 
 \end{itemize}
 
-Given the rise in inflation and cost of living, exploring the relationships connected to personal earnings across different states is fundamental to understanding how factors like education, health status, and age, influence income disparities at a regional level.This inquiry is grounded in the longstanding debate within economic and social research regarding the return on investment in education, health, and wellness. By examining these relationships across diverse geographical areas, the analysis can uncover nuanced insights into how local economies, policies, and opportunities shape the economic benefits of educational attainment. 
+Given the rise in inflation and cost of living, exploring the relationships connected to personal earnings across different states is fundamental to understanding how factors like education, health status, and age, influence income disparities at a regional level. This inquiry is grounded in the longstanding debate within economic and social research regarding the return on investment in education, health, and wellness. By examining these relationships across diverse geographical areas, the analysis can uncover nuanced insights into how local economies, policies, and opportunities shape the economic benefits of educational attainment. 
 
 The U.S. Census is pivotal in the nation's political and economic framework, ensuring each community receives its fair share based on its specific needs (Bureau, 2021).
 
 In addition, it is crucial to the political sphere with its use in redrawing a multitude of political boundaries to ensure each district contains roughly equal numbers of people (Mather & Scommegna, 2019). Its political importance extends even to the U.S. House of Representatives, which bases its apportionment of House seats on Census population data, safeguarding the equity of voting power within the nation (Farley, 2020). 
-
 
 Originating from multiple reputable sources, the dataset focuses on the United States demographic, economic, and educational landscapes as of 2020. It's based on the US Census Bureau's Annual Social and Economic Supplement (ASEC) survey, including the Current Population Survey (CPS) for employment statistics, and adds questions on poverty and migration. Unemployment data comes from the Bureau of Labor Statistics, and urban population percentages from the Census Bureau's Decennial Census. State sales tax rates, sourced from the Tax Foundation, provide a financial perspective.
 
@@ -55,7 +54,13 @@ The dataset was merged on a state basis, focusing on individuals 18 and older to
 
 ## Methods and Analysis
 
-Include EDA from Report 1 
+Before the model building process began, the data was first subsetted to exclude the observation corresponding to the District of Columbia. Exploratory data analysis revealed that it was the sole territory with the level of "Bachelor's Degree" as the response to the variable, "H_ED," or highest educational attainment. As this variable was believed to be a significant predictor in the model, this observation was excluded from the model to prevent skew or extrapolation. Following the removal of this observation, a histogram of the response, pearsonal earnings, appeared to be unimodal with moderate right skew and minimal outliers present. 
+
+The first stage of the model building process then began: fitting the model with quantitative predictors. Scatterplots of each quantitative variable with the response showed varying degrees of association. Moderate to strong relationships with the response existed with four variables: unemployment rate, tax rate, work expenses, and urban percentage. These four variables were used to build a model, resulting in a globally significant model. The model was reduced via the performance of individual t-tests to include only the two most significant quantitative predictors, urban percentage and work expenses. 
+
+Next, qualitative predictors were added to the model. The examination of boxplots of the three qualitative variable with the response suggested that alternative levels of sex does not significantly impact earnings; the median personal earnings of states with a predominantly female workforce is approximately equivalent to those with a predominantly male workforce. However, differing levels of education and health status suggested significant different responses to personal earnings, indicated by non-overlapping interquartile ranges of differing levels for these variables. Therefore, these two quantitative variables, highest education level and health status were added to the model in the second stage of the model building process. The proposed model demonstrated significance by the global f-test. Individual t-tests were then performed to build a model with two predictors: urban percentage and highest educational attainment. The quantitative work expenses predictor became insignificant upon that addition of qualitative predictors, and health status did not demonstrate individual significance. 
+
+No interactions were believed to be influencing the model; the only base level variables that remained were urban percentage and highest educational attainment. 
 
 ANALYSIS: 
 - Multiple linear regression logistic regression 
