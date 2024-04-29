@@ -9,6 +9,7 @@ header-includes:
 - \usepackage{setspace}
 - \usepackage{ulem}
 - \usepackage{hyperref}
+- \usepackage{adjustbox}
 - \onehalfspacing
 ---
 
@@ -23,6 +24,7 @@ library(ggplot2)
 library(corrplot)
 library(car)
 library(caret)
+library(cowplot)
 incomeData<-incomeData |>
   filter(STATEFIPS != 11)
 subsetincomeData<-incomeData[-c(11,19,45,21),]
@@ -135,18 +137,32 @@ boxplot(PEARNVAL~SEX,data=incomeData)
 boxplot(PEARNVAL~HEA,data=incomeData)
 #Interactions? 
 plot(incomeData$URB_PER,incomeData$PEARNVAL, col=as.factor(incomeData$H_ED))
+```
 
+```{r, echo=FALSE}
 # Final model: Assumptions
 summary(subsetincomemod)
+```
 
-#Lack of Fit & Constant Variance: 
-residualPlots(incomemodfinal)
-par(mfrow=(c(2,2)))
+```{r, echo=FALSE}
+par(mfrow=(c(2,3)))
 plot(incomemodfinal,which=1)
 #Normality: 
 plot(incomemodfinal,which=2)
 hist(residuals(incomemodfinal))
 
+```
+
+```{r, echo=FALSE}
+#Continued because I needed to mess with the formatting of the rest of the stuff that was in the above chunk.
+#Lack of Fit & Constant Variance: 
+residualPlots(incomemodfinal,tests=F)
+```
+
+
+```{r,echo=FALSE}
+
+influencePlot(incomemodfinal)
 #External Validation Technique: Cross-splitting: 
 ##Sufficient size assumption met: 
 #Yes: n=46>2k+25
@@ -161,10 +177,12 @@ model.cva <- lm(PEARNVAL~URB_PER+H_ED, data=dataforestimation)
 ### Testing
 predictions.cva <- model.cva %>% predict(dataforprediction)
 ### Evaluating
+
 data.frame(RMSE = RMSE(predictions.cva, dataforprediction$PEARNVAL),
            R2 = R2(predictions.cva, dataforprediction$PEARNVAL),
            MAE = MAE(predictions.cva, dataforprediction$PEARNVAL))
 ```
+
 
 \newpage
 ## Appendix D: References
