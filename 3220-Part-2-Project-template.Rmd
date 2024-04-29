@@ -161,7 +161,7 @@ residualPlots(incomemodfinal,tests=F)
 
 
 ```{r,echo=FALSE}
-
+#outliers
 influencePlot(incomemodfinal)
 #External Validation Technique: Cross-splitting: 
 ##Sufficient size assumption met: 
