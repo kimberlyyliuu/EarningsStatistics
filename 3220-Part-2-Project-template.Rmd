@@ -159,13 +159,13 @@ select<-sample(v)
 dataforestimation<-subsetincomeData[select,]
 dataforprediction<-subsetincomeData[!select,]
 ### Training
-model.vsa <- lm(PEARNVAL~URB_PER+H_ED, data=dataforestimation)
+model.cva <- lm(PEARNVAL~URB_PER+H_ED, data=dataforestimation)
 ### Testing
-predictions.vsa <- model.vsa %>% predict(test.vsa)
+predictions.cva <- model.cva %>% predict(dataforprediction)
 ### Evaluating
-data.frame(RMSE = RMSE(predictions.vsa, test.vsa$PEARNVAL),
-           R2 = R2(predictions.vsa, test.vsa$PEARNVAL),
-           MAE = MAE(predictions.vsa, test.vsa$PEARNVAL))
+data.frame(RMSE = RMSE(predictions.cva, dataforprediction$PEARNVAL),
+           R2 = R2(predictions.cva, dataforprediction$PEARNVAL),
+           MAE = MAE(predictions.cva, dataforprediction$PEARNVAL))
 ```
 
 \newpage
