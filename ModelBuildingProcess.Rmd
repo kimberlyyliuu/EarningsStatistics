@@ -36,6 +36,7 @@ incomeData |>
 incomeData<-incomeData |>
   filter(STATEFIPS != 11)
 
+hist(incomeData$PEARNVAL)
 ##EDA to explore variables in relation to the response, PEARNVAL
 #Scatter plots for quantitative:
 par(mfrow = c(2, 3))
@@ -130,6 +131,10 @@ summary(incomemodfinal)
 
 Stage 3 - Interactions
 There are no interactions believed to be influencing the data. 
+
+```{r}
+boxplot(URB_PER~H_ED,data=incomeData)
+```
 
 Checking the model with stepwise regression: 
 ```{r}
