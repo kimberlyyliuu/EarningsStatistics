@@ -1,5 +1,5 @@
 ---
-title: "Insert heading" 
+title: "The Highest Earner: Factors that affect personal earnings in the United States" 
 author: "KHL"
 fontsize: 12pt
 geometry: margin=1in
@@ -16,7 +16,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,message=FALSE)
 ```
 
-```{r}
+```{r, include=FALSE}
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
 library(dplyr)
 ```
