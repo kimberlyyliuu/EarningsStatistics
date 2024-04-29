@@ -44,47 +44,19 @@ The dataset was merged on a state basis, focusing on individuals 18 and older to
 
 ## Methods and Analysis
 
-Before the model building process began, the data was first subsetted to exclude the observation corresponding to the District of Columbia. Exploratory data analysis revealed that it was the sole territory with the level of "Bachelor's Degree" as the response to the variable, "H_ED," or highest educational attainment. As this variable was believed to be a significant predictor in the model, this observation was excluded from the model to prevent skew or extrapolation. Following the removal of this observation, a histogram of the response, pearsonal earnings, appeared to be unimodal with moderate right skew and minimal outliers present. 
+Before the model building process began, the data was first subsetted to exclude the observation corresponding to the District of Columbia. Exploratory data analysis revealed that it was the sole territory with the level of "Bachelor's Degree" as the response to the variable H_ED, highest educational attainment. As H_ED was believed to be a significant predictor in the model, this observation was excluded from the model to prevent skew or extrapolation. Following the removal of this observation, a histogram of the response, personal earnings, appeared unimodal with moderate right skew and with minimal outliers. 
 
-The first stage of the model building process then began: fitting the model with quantitative predictors. Scatterplots of each quantitative variable with the response showed varying degrees of association. Moderate to strong relationships with the response existed with four variables: unemployment rate, tax rate, work expenses, and urban percentage. These four variables were used to build a model, resulting in a globally significant model. The model was reduced via the performance of individual t-tests to include only the two most significant quantitative predictors, urban percentage and work expenses. 
+The first stage of the model building process then began: fitting the model with quantitative predictors. Quantitative variables were examined for evidence of multicollinearity through correlative plots; no concerning relationships were found, but multicollinearity will be reassessed in the final model. Scatterplots of each quantitative variable with the response showed varying degrees of association. Moderate to strong relationships with the response existed with four variables: unemployment rate, tax rate, work expenses, and urban percentage. These four variables were used to build a model, resulting in a globally significant model. The model was reduced via the performance of individual t-tests to include only the two most significant quantitative predictors, urban percentage and work expenses, which had p-values of 0.00879 and 0.01667, respectively. 
 
 Next, qualitative predictors were added to the model. The examination of boxplots of the three qualitative variable with the response suggested that alternative levels of sex does not significantly impact earnings; the median personal earnings of states with a predominantly female workforce is approximately equivalent to those with a predominantly male workforce. However, differing levels of education and health status suggested significant different responses to personal earnings, indicated by non-overlapping interquartile ranges of differing levels for these variables. Therefore, these two quantitative variables, highest education level and health status were added to the model in the second stage of the model building process. The proposed model demonstrated significance by the global f-test. Individual t-tests were then performed to build a model with two predictors: urban percentage and highest educational attainment. The quantitative work expenses predictor became insignificant upon that addition of qualitative predictors, and health status did not demonstrate individual significance. 
 
-No interactions were believed to be influencing the model; the only base level variables that remained were urban percentage and highest educational attainment. 
+No interactions were believed to be influencing the model, but an interaction between the two remaining main effects within the model was explored. A grouped by scatterplot, plotting PEARNVAL as the response, URB_PER as the quantitative explanatory variable, and H_ED as the qualitative explanatory variable demonstrated no difference in slope when a regression line was plotted through the grouped points. 
 
+From this process, the equation of the proposed model is: $PEARNVAL = 47415.20 + 191.57URB\_PER -6997.66H\_EDvocationalassociates$. An examination of VIFs suggested no concern for multicollinearity with an average VIF and highest individual of 1.103. Analysis of residuals showed a lack of fit with no obvious pattern, a mean of zero, and no fanning patterns, suggesting constant variance. Slight deviations from normality were observed in the qqplot of the residuals of the model, suggested by deviations from linearity on the tail ends of the distribution. Three transformations, logarithmic, exponential, and square root, were attempt to resolve this deviation; however, they did not resolve the violation of normality. The original model, with an untransformed response, was kept as the model is assumed robust to violations of normality due to its sufficient sample size. Examination of outliers was performed and 4 observations were removed on the basis of having excessive leverage and Cook's distance. 
 
-
-ANALYSIS: 
-- Multiple linear regression logistic regression 
-- Include required analysis steps
-• Include the ”added techniques” that you selected
-• Assessing the model.
-• Selecting a final ”best” model.
-• NOTE: Your analysis should follow the appropriate order on your poster with a
-logical flow
-
-Model building with significance testing (should be supported by EDA and/or variable
-screening)
-• Identify and check for multicollinearity
-• Residual analysis (assumptions + extreme observations) Make necessary adjustments as
-you see fit. If you are attempting to correct a violation, you only need to try up to three
-corrections, if the first doesn’t work. Include plots or output as needed.
-• Final model selected should be assessed. It may not be great, but you will explain that in
-conclusion
-• Include at least ONE additional techniques from the list to add to your analysis:
-Weighted least squares (Ch 9.4), External Model validation (Ch 5.11), box -cox
-transformation (supplemental), or another technique or aspect of MLR you learned on
-your own.
-• NOTE: if you have a unique situation with your data- discuss your analysis plan with Prof
-Varanyak
-
-
+With data subsetted to exclude outliers, a new final model is proposed: $PEARNVAL = 47408.52 + 191.95URB\_PER -7017.40H\_EDvocationalassociates$. After verifying the model was trained on data of sufficient size, the external validation technique of data splitting was used to examine the model. The data was split randomly into two subsets of equal size, one used to estimate model parameters and the other used to assess the model's predictive ability. The results from cross-splitting suggested a generally poor predictive ability of the model, as will be discussed in subsequent sections. 
 
 ## Results
-The statistical interpretation of the final model. This should be in
-statistical terms and overall interpreting and assessing the statistical usefulness
-of the model with the appropriate metrics. There should be no R output (that
-will go in the appendix). However, you will include your final model.
 
 $PEARNVAL = 47408.52 + 191.95URB\_PER -7017.40H\_EDvocationalassociates$
 
@@ -95,9 +67,7 @@ In our final model, urban percentile and level of higher education are the most 
 
 When estimating the average personal earnings of Virginia given an URB_PER of 75.5 and H_EDVassoc of 0, the model predicted that the personal earnings would be \$61,900.74; the actual earnings were \$71,818.63. The prediction was off by $9,917.89, a percent error of 13.8%. 
 
-While urban environment and educational attainment do influence personal income, they may not be the most robust predictors. Additional variables or more complex models could be necessary to capture the full dynamics of affecting personal income and increase its accuracy. Further research could include other variables not analyzed by our data, such as family size or occupation. Additionally, since we were using 2020 Census data, that could cause a skew towards high unemployment and decrease in personal earnings due to the state of the economy during the global pandemic. Thus, increasing our dataset to beyond 2020 can be beneficial at creating more observations. We could also modify existing variables by treating gender as a continuous proprotion instead of a binomial variable. In all, this model is a good starting point for understanding the relationship between urban environment, educational attainment, and personal earnings, but further research is needed to create a stronger model.
-
-
+While urban environment and educational attainment do influence personal income, they may not be the most robust predictors. Additional variables or more complex models could be necessary to capture the full dynamics of affecting personal income and increase its accuracy. Further research could include other variables not analyzed by our data, such as family size or occupation. Additionally, since we were using 2020 Census data, that could cause a skew towards high unemployment and decrease in personal earnings due to the state of the economy during the global pandemic. Thus, increasing our dataset to beyond 2020 can be beneficial at creating more observations. We could also modify existing variables by treating gender as a continuous proportion instead of a binomial variable. In all, this model is a good starting point for understanding the relationship between urban environment, educational attainment, and personal earnings, but further research is needed to create a stronger model.
 
 \newpage
 
