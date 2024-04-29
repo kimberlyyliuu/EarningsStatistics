@@ -19,6 +19,14 @@ knitr::opts_chunk$set(echo = TRUE, highlight=FALSE, comment=NA, warnings=FALSE,m
 ```{r, include=FALSE}
 incomeData<-read.csv("https://raw.githubusercontent.com/kimberlyyliuu/STAT3220Project/main/completeData")
 library(dplyr)
+library(ggplot2)
+library(corrplot)
+library(car)
+library(caret)
+incomeData<-incomeData |>
+  filter(STATEFIPS != 11)
+subsetincomeData<-incomeData[-c(11,19,45,21),]
+subsetincomemod<-lm(PEARNVAL~URB_PER+H_ED,data=subsetincomeData)
 ```
 
 
@@ -44,13 +52,9 @@ The dataset was merged on a state basis, focusing on individuals 18 and older to
 
 ## Methods and Analysis
 
-Before the model building process began, the data was first subsetted to exclude the observation corresponding to the District of Columbia. Exploratory data analysis revealed that it was the sole territory with the level of "Bachelor's Degree" as the response to the variable H_ED, highest educational attainment. As H_ED was believed to be a significant predictor in the model, this observation was excluded from the model to prevent skew or extrapolation. Following the removal of this observation, a histogram of the response, personal earnings, appeared unimodal with moderate right skew and with minimal outliers. 
+Before the model building process began, the data was first subsetted to exclude the observation corresponding to the District of Columbia. Exploratory data analysis revealed that it was the sole territory with the level of "Bachelor's Degree" as the response to the variable H_ED, highest educational attainment. As H_ED was believed to be a significant predictor in the model, this observation was excluded from the model to prevent skew or extrapolation. Following the removal of this observation, a histogram of the response, personal earnings, appeared unimodal with moderate right skew and with minimal outliers. The first stage of the model building process then began: fitting the model with quantitative predictors. Quantitative variables were examined for evidence of multicollinearity through correlative plots; no concerning relationships were found, but multicollinearity will be reassessed in the final model. Scatterplots of each quantitative variable with the response showed varying degrees of association. Moderate to strong relationships with the response existed with four variables: unemployment rate, tax rate, work expenses, and urban percentage. These four variables were used to build a model, resulting in a globally significant model. The model was reduced via the performance of individual t-tests to include only the two most significant quantitative predictors, urban percentage and work expenses, which had p-values of 0.00879 and 0.01667, respectively. 
 
-The first stage of the model building process then began: fitting the model with quantitative predictors. Quantitative variables were examined for evidence of multicollinearity through correlative plots; no concerning relationships were found, but multicollinearity will be reassessed in the final model. Scatterplots of each quantitative variable with the response showed varying degrees of association. Moderate to strong relationships with the response existed with four variables: unemployment rate, tax rate, work expenses, and urban percentage. These four variables were used to build a model, resulting in a globally significant model. The model was reduced via the performance of individual t-tests to include only the two most significant quantitative predictors, urban percentage and work expenses, which had p-values of 0.00879 and 0.01667, respectively. 
-
-Next, qualitative predictors were added to the model. The examination of boxplots of the three qualitative variable with the response suggested that alternative levels of sex does not significantly impact earnings; the median personal earnings of states with a predominantly female workforce is approximately equivalent to those with a predominantly male workforce. However, differing levels of education and health status suggested significant different responses to personal earnings, indicated by non-overlapping interquartile ranges of differing levels for these variables. Therefore, these two quantitative variables, highest education level and health status were added to the model in the second stage of the model building process. The proposed model demonstrated significance by the global f-test. Individual t-tests were then performed to build a model with two predictors: urban percentage and highest educational attainment. The quantitative work expenses predictor became insignificant upon that addition of qualitative predictors, and health status did not demonstrate individual significance. 
-
-No interactions were believed to be influencing the model, but an interaction between the two remaining main effects within the model was explored. A grouped by scatterplot, plotting PEARNVAL as the response, URB_PER as the quantitative explanatory variable, and H_ED as the qualitative explanatory variable demonstrated no difference in slope when a regression line was plotted through the grouped points. 
+Next, qualitative predictors were added to the model. The examination of boxplots of the three qualitative variable with the response suggested that alternative levels of sex does not significantly impact earnings; the median personal earnings of states with a predominantly female workforce is approximately equivalent to those with a predominantly male workforce. However, differing levels of education and health status suggested significant different responses to personal earnings, indicated by non-overlapping interquartile ranges of differing levels for these variables. Therefore, these two quantitative variables, highest education level and health status were added to the model in the second stage of the model building process. The proposed model demonstrated significance by the global f-test. Individual t-tests were then performed to build a model with two predictors: urban percentage and highest educational attainment. The quantitative work expenses predictor became insignificant upon that addition of qualitative predictors, and health status did not demonstrate individual significance. No interactions were believed to be influencing the model, but an interaction between the two remaining main effects within the model was explored. A grouped by scatterplot, plotting PEARNVAL as the response, URB_PER as the quantitative explanatory variable, and H_ED as the qualitative explanatory variable demonstrated no difference in slope when a regression line was plotted through the grouped points. 
 
 From this process, the equation of the proposed model is: $PEARNVAL = 47415.20 + 191.57URB\_PER -6997.66H\_EDvocationalassociates$. An examination of VIFs suggested no concern for multicollinearity with an average VIF and highest individual of 1.103. Analysis of residuals showed a lack of fit with no obvious pattern, a mean of zero, and no fanning patterns, suggesting constant variance. Slight deviations from normality were observed in the qqplot of the residuals of the model, suggested by deviations from linearity on the tail ends of the distribution. Three transformations, logarithmic, exponential, and square root, were attempt to resolve this deviation; however, they did not resolve the violation of normality. The original model, with an untransformed response, was kept as the model is assumed robust to violations of normality due to its sufficient sample size. Examination of outliers was performed and 4 observations were removed on the basis of having excessive leverage and Cook's distance. 
 
@@ -65,7 +69,7 @@ This model is statistically significant with a p-value < 0.0001 and an adjusted 
 ## Conclusions
 In our final model, urban percentile and level of higher education are the most significant variables for predicting personal earnings by state. Our model shows that increase in urban percentile (URB_PER) leads to higher personal earnings whereas possession of a higher education vocational associate's degree (H_EDvassoc) results in lower personal earnings in the United States.
 
-When estimating the average personal earnings of Virginia given an URB_PER of 75.5 and H_EDVassoc of 0, the model predicted that the personal earnings would be \$61,900.74; the actual earnings were \$71,818.63. The prediction was off by $9,917.89, a percent error of 13.8%. 
+When estimating the average personal earnings of Virginia given an URB_PER of 75.5 and H_EDVassoc of 0, the model predicted that the personal earnings would be \$61,900.74; the actual earnings were \$71,818.63. The prediction was off by \$9,917.89, a percent error of 13.8%. 
 
 While urban environment and educational attainment do influence personal income, they may not be the most robust predictors. Additional variables or more complex models could be necessary to capture the full dynamics of affecting personal income and increase its accuracy. Further research could include other variables not analyzed by our data, such as family size or occupation. Additionally, since we were using 2020 Census data, that could cause a skew towards high unemployment and decrease in personal earnings due to the state of the economy during the global pandemic. Thus, increasing our dataset to beyond 2020 can be beneficial at creating more observations. We could also modify existing variables by treating gender as a continuous proportion instead of a binomial variable. In all, this model is a good starting point for understanding the relationship between urban environment, educational attainment, and personal earnings, but further research is needed to create a stronger model.
 
@@ -92,7 +96,7 @@ While urban environment and educational attainment do influence personal income,
 ## Appendix B: Data Rows
 ```{r, echo=FALSE}
 # Use head() function to output first several rows
-head(incomeData,n=15)
+head(subsetincomeData,n=15)
 ```
 
 \newpage
@@ -100,9 +104,10 @@ head(incomeData,n=15)
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
 ## This code chunk can be used to execute any functions or summaries 
 ## that will not be included in your appendix
-##Figures and Tables Final model output and plots. This should only be a
+## Figures and Tables Final model output and plots. This should only be a
 ## summary of your final model. This is limited to 3 pages.
-
+incomemodfinal<-lm(PEARNVAL~URB_PER+H_ED,data=incomeData)
+vif(incomemodfinal)
 ```
 
 ```{r, echo=FALSE}
@@ -110,6 +115,57 @@ head(incomeData,n=15)
 ## Include the relevant plots from EDA, assumptions, and your additional techniques
 ## This should NOT be a dump of all of your plots and outputs.
 ## Refer to the Rmarkdown guide for sizing information on your plots
+
+#Initial concern for multicollinearity: 
+quantincomeData<-incomeData[7:11]
+corrplot(cor(quantincomeData))
+
+##EDA to explore variables in relation to the response, PEARNVAL
+#Scatter plots for quantitative:
+par(mfrow = c(2, 3))
+plot(incomeData$AGE,incomeData$PEARNVAL,xlab="AGE",ylab="PEARNVAL")
+plot(incomeData$UNEMP_RATE,incomeData$PEARNVAL,xlab="UNEMP_RATE",ylab="PEARNVAL")
+plot(incomeData$TAX_RTE,incomeData$PEARNVAL,xlab="TAX_RTE",ylab="PEARNVAL")
+plot(incomeData$URB_PER,incomeData$PEARNVAL,xlab="URB_PER",ylab="PEARNVAL")
+plot(incomeData$WRK_SPND,incomeData$PEARNVAL,xlab="WRK_SPND",ylab="PEARNVAL")
+#Boxplots for qualitative:
+par(mfrow=c(1,3))
+boxplot(PEARNVAL~H_ED,data=incomeData)
+boxplot(PEARNVAL~SEX,data=incomeData)
+boxplot(PEARNVAL~HEA,data=incomeData)
+#Interactions? 
+ggplot(incomeData, aes(x = URB_PER, y = PEARNVAL, color = H_ED)) +
+  geom_point() +
+  labs(x = "Urban Percentage", y = "Personal Earnings", title = "Scatterplot of Personal Earnings by Urban Percentage and Education")
+
+# Final model: Assumptions
+summary(subsetincomemod)
+
+#Lack of Fit & Constant Variance: 
+residualPlots(incomemodfinal)
+par(mfrow=(c(2,2)))
+plot(incomemodfinal,which=1)
+#Normality: 
+plot(incomemodfinal,which=2)
+hist(residuals(incomemodfinal))
+
+#External Validation Technique: Cross-splitting: 
+##Sufficient size assumption met: 
+#Yes: n=46>2k+25
+#     n=46>29
+#Randomly split the data into exact number of cases: 
+v<-as.vector(c(rep(TRUE,23),rep(FALSE,23)))
+select<-sample(v)
+dataforestimation<-subsetincomeData[select,]
+dataforprediction<-subsetincomeData[!select,]
+### Training
+model.vsa <- lm(PEARNVAL~URB_PER+H_ED, data=dataforestimation)
+### Testing
+predictions.vsa <- model.vsa %>% predict(test.vsa)
+### Evaluating
+data.frame(RMSE = RMSE(predictions.vsa, test.vsa$PEARNVAL),
+           R2 = R2(predictions.vsa, test.vsa$PEARNVAL),
+           MAE = MAE(predictions.vsa, test.vsa$PEARNVAL))
 ```
 
 \newpage
