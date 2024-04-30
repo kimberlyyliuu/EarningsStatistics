@@ -213,4 +213,4 @@ data.frame(RMSE = RMSE(predictions.cva, dataforprediction$PEARNVAL),
 - ASEC 2020 Public Use Data Dictionary. (2020). https://tinyurl.com/3h8vexva
 
 ### Supplemental Code and Analysis Help
-- https://rpubs.com/muxicheng/1004550
+- Cheng, M. (2023, February 15). Simple examples of cross-validation. RPubs. https://rpubs.com/muxicheng/1004550 
