@@ -10,6 +10,7 @@ header-includes:
 - \usepackage{ulem}
 - \usepackage{hyperref}
 - \onehalfspacing
+
 ---
 
 ```{r setup, include=FALSE}
@@ -32,8 +33,10 @@ subsetincomemod<-lm(PEARNVAL~URB_PER+H_ED,data=subsetincomeData)
 
 
 \begin{center}
+```{r, echo=FALSE, out.width='100%'}
+knitr::include_graphics("/Users/hadleymcq/STAT3220Project/Stonks.png")
+```
 
-remove the pound sign and insert the file path to the image on your computer in the {}
 
 \end{center}
 
