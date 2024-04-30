@@ -133,7 +133,9 @@ Stage 3 - Interactions
 There are no interactions believed to be influencing the data. 
 
 ```{r}
-boxplot(URB_PER~H_ED,data=incomeData)
+ggplot(incomeData, aes(x = URB_PER, y = PEARNVAL, color = H_ED)) +
+  geom_point() +
+  labs(x = "Urban Percentage", y = "Personal Earnings", title = "Scatterplot of Personal Earnings by Urban Percentage and Education")
 ```
 
 Checking the model with stepwise regression: 
