@@ -206,5 +206,4 @@ data.frame(RMSE = RMSE(predictions.cva, dataforprediction$PEARNVAL),
 - ASEC 2020 Public Use Data Dictionary. (2020). https://tinyurl.com/3h8vexva
 
 ### Supplemental Code and Analysis Help
-1. List your references used to learn more about your techniques and coding here
-https://rpubs.com/muxicheng/1004550
+- https://rpubs.com/muxicheng/1004550
