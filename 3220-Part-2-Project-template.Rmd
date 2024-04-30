@@ -68,7 +68,7 @@ $PEARNVAL = 47408.52 + 191.95URB\_PER -7017.40H\_EDvocationalassociates$
 This model is statistically significant with a p-value < 0.0001 and an adjusted r-squared value of 0.56, indicating that this model accounts for 56% of the variation in the data. Additionally, The R² value of 0.5792 suggests that approximately 57.92% of the variance in personal earnings can be explained by urban percentile and higher education. 
 
 ## Conclusions
-In our final model, urban percentile and level of higher education are the most significant variables for predicting personal earnings by state. Our model shows that increase in urban percentile (URB_PER) leads to higher personal earnings whereas possession of a higher education vocational associate's degree (H_EDvassoc) results in lower personal earnings in the United States.
+Our model shows that increase in urban percentile (URB_PER) leads to higher personal earnings whereas possession of a higher education vocational associate's degree (H_EDvassoc) results in lower personal earnings in the United States. With a low R² of 0.5792 and a high mean squared error of 0.0001, the model is not a strong predictor of personal earnings.
 
 When estimating the average personal earnings of Virginia given an URB_PER of 75.5 and H_EDVassoc of 0, the model predicted that the personal earnings would be \$61,900.74; the actual earnings were \$71,818.63. The prediction was off by \$9,917.89, a percent error of 13.8%. 
 
