@@ -9,7 +9,6 @@ header-includes:
 - \usepackage{setspace}
 - \usepackage{ulem}
 - \usepackage{hyperref}
-- \usepackage{adjustbox}
 - \onehalfspacing
 ---
 
@@ -99,7 +98,6 @@ While urban environment and educational attainment do influence personal income,
 # Use head() function to output first several rows
 head(subsetincomeData,n=15)
 ```
-\newpage
 
 ## Appendix C: Tables and Figures
 ```{r, echo=FALSE, warning=FALSE,results=FALSE}
@@ -139,24 +137,26 @@ boxplot(PEARNVAL~HEA,data=incomeData)
 plot(incomeData$URB_PER,incomeData$PEARNVAL, col=as.factor(incomeData$H_ED))
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,out.width="50%",out.height="50%"} 
 # Final model: Assumptions
 summary(subsetincomemod)
+
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width="50%",out.height="50%"}
+
 par(mfrow=(c(2,3)))
 plot(incomemodfinal,which=1)
 #Normality: 
 plot(incomemodfinal,which=2)
 hist(residuals(incomemodfinal))
-
-```
-
-```{r, echo=FALSE}
-#Continued because I needed to mess with the formatting of the rest of the stuff that was in the above chunk.
 #Lack of Fit & Constant Variance: 
 residualPlots(incomemodfinal,tests=F)
+```
+
+```{r, echo=FALSE, out.width="50%",out.height="50%"}
+#Continued because I needed to mess with the formatting of the rest of the stuff that was in the above chunk.
+
 ```
 
 
